@@ -295,7 +295,6 @@ Quick
   
 
   
-</footer>
 
 <div>
   <span id="timeDate">载入天数...</span>
@@ -328,6 +327,9 @@ Quick
   setInterval("createtime()",250);
   </script>
 </div>
+
+</footer>
+
 
 
   <!-- SCRIPTS -->
@@ -386,13 +388,13 @@ Quick
       
       $.ajax({
         type: 'GET',
-        url: 'v1.hitokoto.cn',
+        url: 'https://v1.hitokoto.cn/',
         headers: {},
         dataType: 'json',
         success: function (result) {
           var text;
           if (result) {
-            var keys = ''.split('.')
+            var keys = 'hitokoto'.split('.')
             if (result instanceof Array) {
               result = result[0]
             }
