@@ -13,15 +13,15 @@
       preload: 'none',
       audio: [
         {
-          name: '血落霜寒 - 无垠之白',
-          artist: '陈致逸',
-          url: '/songs/血落霜寒 - 无垠之白.mp3',
+          name: 'color',
+          artist: 'CHiCO with HoneyWorks',
+          url: '/songs/color.mp3',
           cover: '/img/cg/[void_0]85543107.jpg'
         },
-       {
-          name: '璃月的晴空',
-          artist: '陈致逸',
-          url: '/songs/璃月的晴空.mp3',
+         {
+          name: '世界は恋に落ちている',
+          artist: 'CHiCO with HoneyWorks ',
+          url: '/songs/世界は恋に落ちている.mp3',
           cover: '/img/cg/[void_0]85543107.jpg'
         }
       ]
