@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>shop system</title>
+    <link href="/2021/04/11/shop-system/"/>
+    <url>/2021/04/11/shop-system/</url>
+    
+    <content type="html"><![CDATA[<ul><li>​    <strong>预知</strong>：Java项目中大致分为三层：</li></ul><p>   【1】<strong>控制层</strong>（controller）的职能是负责读取视图表现层的数据，控制用户的输入，并调用业务层的方法；</p><p>   【2】<strong>业务层</strong>（service）需要根据系统的实际业务需求进行逻辑代码的编写，有些业务逻辑需要通过与数据库交互的，则业务逻辑层需要调用数据访问层的相关方法实现与数据库的交互，</p><p>   【3】<strong>数据访问层</strong>（dao）只负责与数据库的数据交互，将数据进行存储读取操作</p><p>  【注释；表现层就是看到的东西，比如你现在看到的当前页面<br>                控制层就将你的请求从页面传到后台代码<br>                逻辑层就是处理你的请求的代码<br>                 DAO层就是将数据存到数据库中的代码】</p><ul><li><p><strong>项目流程图</strong>：</p><p> <img src="/img/pg/shop-system.png" alt="shop-system "></p></li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>travel</title>
     <link href="/2021/04/06/travel/"/>
     <url>/2021/04/06/travel/</url>

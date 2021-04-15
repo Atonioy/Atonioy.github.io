@@ -18,9 +18,25 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>归档 - 哒哒哒！</title>
+  <title>shop system - 哒哒哒！</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -55,7 +71,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -149,14 +165,59 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/dg/z.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="shop system">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-11 19:46" pubdate>
+        2021年4月11日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      229 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      2
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
 
             
           </div>
@@ -169,46 +230,99 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 3 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/2021/04/11/shop-system/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">shop system</span>
-      <time style="float: right;">04-11</time>
-    </a>
-  
-    
-    <a href="/2021/04/06/travel/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">travel</span>
-      <time style="float: right;">04-06</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">shop system</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年4月15日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <ul>
+<li>​    <strong>预知</strong>：Java项目中大致分为三层：</li>
+</ul>
+<p>   【1】<strong>控制层</strong>（controller）的职能是负责读取视图表现层的数据，控制用户的输入，并调用业务层的方法；</p>
+<p>   【2】<strong>业务层</strong>（service）需要根据系统的实际业务需求进行逻辑代码的编写，有些业务逻辑需要通过与数据库交互的，则业务逻辑层需要调用数据访问层的相关方法实现与数据库的交互，</p>
+<p>   【3】<strong>数据访问层</strong>（dao）只负责与数据库的数据交互，将数据进行存储读取操作</p>
+<p>  【注释；表现层就是看到的东西，比如你现在看到的当前页面<br>                控制层就将你的请求从页面传到后台代码<br>                逻辑层就是处理你的请求的代码<br>                 DAO层就是将数据存到数据库中的代码】</p>
+<ul>
+<li><p><strong>项目流程图</strong>：</p>
+<p> <img src="/img/pg/shop-system.png" srcset="/img/loading.gif" lazyload alt="shop-system "></p>
+</li>
+</ul>
 
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/06/travel/">
+                        <span class="hidden-mobile">travel</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -313,9 +427,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
