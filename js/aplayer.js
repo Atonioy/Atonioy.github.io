@@ -16,13 +16,13 @@
           name: 'color',
           artist: 'CHiCO with HoneyWorks',
           url: '/songs/color.mp3',
-          cover: '/img/cg/[void_0]85543107.jpg'
+          cover: '/img/tg/[void_0]85543107.jpg'
         },
          {
           name: '世界は恋に落ちている',
           artist: 'CHiCO with HoneyWorks ',
           url: '/songs/世界は恋に落ちている.mp3',
-          cover: '/img/cg/[void_0]85543107.jpg'
+          cover: '/img/tg/[void_0]85543107.jpg'
         }
       ]
     });
