@@ -18,7 +18,7 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>travel - 哒哒哒！</title>
+  <title>数据库中的注意事项 - 哒哒哒！</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -170,7 +170,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="travel">
+            <span class="h2" id="subtitle" title="数据库中的注意事项">
               
             </span>
 
@@ -180,8 +180,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-06 21:28" pubdate>
-        2021年4月6日 晚上
+      <time datetime="2021-04-11 08:42" pubdate>
+        2021年4月11日 早上
       </time>
     </span>
   
@@ -192,7 +192,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      37 字
+      956 字
     </span>
   
 
@@ -202,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      10
        分钟
     </span>
   
@@ -240,22 +240,53 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">travel</h1>
+            <h1 style="display: none">数据库中的注意事项</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年4月6日 晚上
+                  本文最后更新于：2021年4月29日 早上
                 
               </p>
             
             <div class="markdown-body">
-              <p>久违的踏青，天上也下着小雨，路上没有多少行人，自然中的清新感也扫去了心中的烦闷感<img src="../../../../img/pg/e.jpg" srcset="/img/loading.gif" lazyload alt="e"></p>
-<p><img src="../../../../img/pg/c.jpg" srcset="/img/loading.gif" lazyload alt="c"></p>
-<p><img src="../../../../img/pg/d.jpg" srcset="/img/loading.gif" lazyload alt="d"></p>
-<p><img src="../../../../img/pg/b.jpg" srcset="/img/loading.gif" lazyload alt="b"></p>
-<p><img src="../../../../img/pg/a.jpg" srcset="/img/loading.gif" lazyload alt="a"></p>
-<p><img src="../../../../img/pg/f.jpg" srcset="/img/loading.gif" lazyload alt="f"></p>
-<p><img src="/img/pg/g.jpg" srcset="/img/loading.gif" lazyload alt="g"></p>
+              <ol>
+<li><strong>数据库连接问题</strong></li>
+</ol>
+<p>​     在导入idea项目后，尝试连接数据库，即使账号密码正确，但连接仍一直失败，报错提示:”error no. 1045 access denied for user ‘root’@’*****’ (using password:YES)。“ 网上查询得知mysql默认root账号只允许本机(localhost, 127.0.0.1)来连接访问. 因此可采取如下方法解决。</p>
+<ul>
+<li> 运行  mysql -u root -p</li>
+</ul>
+<p>​               use mysql；</p>
+<ul>
+<li>   GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘123456’  </li>
+</ul>
+<p>  ​                 这里的123456为你给新增权限用户设置的密码，%代表所有主机，也可以具体到你的主机ip地址。</p>
+<ul>
+<li><p>flush privileges;      这一步一定要做，不然无法成功！ 这句表示从mysql数据库的grant表中重新加载权限数据</p>
+<p>​              因为MySQL把权限都放在了cache中，所以在做完更改后需要重新加载。</p>
+<p>2.数据库声明问题</p>
+<p>   一般在一个方法或类的声明处通过throws声明方法或类中可能抛出的异常，而在方法或类内部一般通过throw声明一个准实的异常信息。</p>
+</li>
+</ul>
+<p> 2.<strong>数据库的部分依赖，完全依赖，传递依赖以及三种范式</strong></p>
+<ol>
+<li><strong>部分函数依赖</strong>：设X,Y是关系R的两个属性集合，存在X→Y，若X’是X的真子集，存在X’→Y，则称Y部分函数依赖于X。</li>
+</ol>
+<blockquote>
+<p>举个例子：通过AB能得出C，通过A也能得出C，通过B也能得出C，那么说C部分依赖于AB。</p>
+</blockquote>
+<p>   2.<strong>完全函数依赖</strong>：设X,Y是关系R的两个属性集合，X’是X的真子集，存在X→Y，但对每一个X’都有X’!→Y，则称Y完全函数依赖于X。</p>
+<blockquote>
+<p>举个例子：通过AB能得出C，但是AB单独得不出C，那么说C完全依赖于AB.</p>
+</blockquote>
+<p>   3.<strong>传递函数依赖</strong>：设X,Y,Z是关系R中互不相同的属性集合，存在X→Y(Y !→X),Y→Z，则称Z传递函数依赖于X。</p>
+<blockquote>
+<p>举个例子：通过A得到B，通过B得到C，但是C得不到B，B得不到A，那么成C传递依赖于A</p>
+</blockquote>
+<p><strong>三种范式</strong><br>1 、第一范式（1NF）<br>      在任何一个关系数据库中，第一范式（1NF）是对关系模式的基本要求，不满足第一范式（1NF）的数据库就不是关系数据库。<br>所谓第一范式（1NF）是指数据库表的每一列(即每个属性)都是不可分割的基本数据项，同一列中不能有多个值，即实体中的某个属性不能有多个值或者不能有重复的属性。<strong>简而言之，第一范式就是无重复的列。</strong><br>2、 第二范式（2NF）<br>    第二范式（2NF）要求实体的属性完全依赖于主关键字。所谓完全依赖是指不能存在仅依赖主关键字一部分的属性，如果存在，那么这个属性和主关键字的这一部分应该分离出来形成一个新的实体，新实体与原实体之间是一对多的关系。为实现区分通常需要为表加上一个列，以存储各个实例的唯一标识。<strong>简而言之，第二范式就是非主属性依赖于主关键字。</strong><br>3 、第三范式（3NF）<br>     满足第三范式（3NF）必须先满足第二范式（2NF）。在满足第二范式的基础上，切不存在传递函数依赖，那么就是第三范式。<strong>简而言之，第三范式就是属性不依赖于其它非主属性。</strong></p>
+<p><strong>简而言之</strong><br><strong>1、第一范式（1NF）：一个关系模式R的所有属性都是不可分的基本数据项。</strong></p>
+<p><strong>2、第二范式（2NF）：满足第一范式，然后消除部分依赖。</strong></p>
+<p><strong>3、第三范式（3NF）： 满足第二范式，消除传递依赖。</strong></p>
 
             </div>
             <hr>
@@ -266,7 +297,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%94%9F%E6%B4%BB%E9%9A%8F%E8%AE%B0/">生活随记</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
                     
                   </div>
                 
@@ -283,9 +314,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+                      <a href="/2021/04/11/shop-system/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">数据库中的注意事项</span>
+                        <span class="hidden-mobile">shop system</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -293,8 +324,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/28/%E8%83%8C%E5%BD%B1/">
-                        <span class="hidden-mobile">背影</span>
+                      <a href="/2021/04/06/travel/">
+                        <span class="hidden-mobile">travel</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
