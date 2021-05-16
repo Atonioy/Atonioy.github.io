@@ -249,7 +249,7 @@
               </p>
             
             <div class="markdown-body">
-              <h4 id="1-数据库连接问题"><a href="#1-数据库连接问题" class="headerlink" title="1.数据库连接问题"></a>1.<strong>数据库连接问题</strong></h4><p>​     在导入idea项目后，尝试连接数据库，即使账号密码正确，但连接仍一直失败，报错提示:”error no. 1045 access denied for user ‘root’@’*****’ (using password:YES)。“ 网上查询得知mysql默认root账号只允许本机(localhost, 127.0.0.1)来连接访问. 因此可采取如下方法解决。</p>
+              <h4 id="1-数据库连接问题"><a href="#1-数据库连接问题" class="headerlink" title="1.数据库连接问题"></a>1.<strong>数据库连接问题</strong></h4><h5 id="1-解决方法"><a href="#1-解决方法" class="headerlink" title="1.  解决方法"></a>1.  解决方法</h5><p>​     在导入idea项目后，尝试连接数据库，即使账号密码正确，但连接仍一直失败，报错提示:”error no. 1045 access denied for user ‘root’@’*****’ (using password:YES)。“ 网上查询得知mysql默认root账号只允许本机(localhost, 127.0.0.1)来连接访问. 因此可采取如下方法解决。</p>
 <ul>
 <li> 运行  mysql -u root -p</li>
 </ul>
@@ -261,8 +261,7 @@
 <ul>
 <li><p>flush privileges;      这一步一定要做，不然无法成功！ 这句表示从mysql数据库的grant表中重新加载权限数据</p>
 <p>​              因为MySQL把权限都放在了cache中，所以在做完更改后需要重新加载。</p>
-<p>2.数据库声明问题</p>
-<p>   一般在一个方法或类的声明处通过throws声明方法或类中可能抛出的异常，而在方法或类内部一般通过throw声明一个准实的异常信息。</p>
+<h5 id="2-数据库声明问题"><a href="#2-数据库声明问题" class="headerlink" title="2.数据库声明问题"></a>2.数据库声明问题</h5><p>   一般在一个方法或类的声明处通过throws声明方法或类中可能抛出的异常，而在方法或类内部一般通过throw声明一个准实的异常信息。</p>
 <hr>
 </li>
 </ul>
@@ -301,7 +300,7 @@
 <p>（姓名，性别）唯一，所以是一个超键</p>
 <p>（姓名，性别，年龄）唯一，所以是一个超键</p>
 </blockquote>
-<p> 2.主键是选中的一个候选键</p>
+<p>  2.主键是选中的一个候选键</p>
 <blockquote>
 <p>身份证唯一，而且没有多余属性，所以是一个候选键</p>
 <p>姓名唯一，而且没有多余属性，所以是一个候选键</p>
