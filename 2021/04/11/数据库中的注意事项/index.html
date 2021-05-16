@@ -249,22 +249,17 @@
               </p>
             
             <div class="markdown-body">
-              <h4 id="1-数据库连接问题"><a href="#1-数据库连接问题" class="headerlink" title="1.数据库连接问题"></a>1.<strong>数据库连接问题</strong></h4><h5 id="1-解决方法"><a href="#1-解决方法" class="headerlink" title="1.  解决方法"></a>1.  解决方法</h5><p>​     在导入idea项目后，尝试连接数据库，即使账号密码正确，但连接仍一直失败，报错提示:”error no. 1045 access denied for user ‘root’@’*****’ (using password:YES)。“ 网上查询得知mysql默认root账号只允许本机(localhost, 127.0.0.1)来连接访问. 因此可采取如下方法解决。</p>
-<ul>
-<li> 运行  mysql -u root -p</li>
-</ul>
+              <h4 id="1-数据库连接问题"><a href="#1-数据库连接问题" class="headerlink" title="1.数据库连接问题"></a>1.<strong>数据库连接问题</strong></h4><h5 id="1-解决方法"><a href="#1-解决方法" class="headerlink" title="1.解决方法"></a>1.解决方法</h5><p>​      在导入idea项目后，尝试连接数据库，即使账号密码正确，但连接仍一直失败，报错提示:”error no. 1045 access denied for user ‘root’@’*****’ (using password:YES)。“ 网上查询得知mysql默认root账号只允许本机(localhost, 127.0.0.1)来连接访问. 因此可采取如下方法解决。</p>
+<blockquote>
+<p>运行  mysql -u root -p</p>
 <p>​               use mysql；</p>
-<ul>
-<li>   GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘123456’  </li>
-</ul>
-<p>  ​                 这里的123456为你给新增权限用户设置的密码，%代表所有主机，也可以具体到你的主机ip地址。</p>
-<ul>
-<li><p>flush privileges;      这一步一定要做，不然无法成功！ 这句表示从mysql数据库的grant表中重新加载权限数据</p>
+<p>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘123456’  </p>
+<p>​                 这里的123456为你给新增权限用户设置的密码，%代表所有主机，也可以具体到你的主机ip地址。</p>
+<p>lush privileges;      这一步一定要做，不然无法成功！ 这句表示从mysql数据库的grant表中重新加载权限数据</p>
 <p>​              因为MySQL把权限都放在了cache中，所以在做完更改后需要重新加载。</p>
-<h5 id="2-数据库声明问题"><a href="#2-数据库声明问题" class="headerlink" title="2.数据库声明问题"></a>2.数据库声明问题</h5><p>   一般在一个方法或类的声明处通过throws声明方法或类中可能抛出的异常，而在方法或类内部一般通过throw声明一个准实的异常信息。</p>
+</blockquote>
+<h5 id="2-声明"><a href="#2-声明" class="headerlink" title="2.声明"></a>2.声明</h5><p>   一般在一个方法或类的声明处通过throws声明方法或类中可能抛出的异常，而在方法或类内部一般通过throw声明一个准实的异常信息。</p>
 <hr>
-</li>
-</ul>
 <h4 id=""><a href="#" class="headerlink" title=""></a></h4><h4 id="2-数据库的部分依赖，完全依赖，传递依赖以及三种范式"><a href="#2-数据库的部分依赖，完全依赖，传递依赖以及三种范式" class="headerlink" title="2.数据库的部分依赖，完全依赖，传递依赖以及三种范式"></a>2.<strong>数据库的部分依赖，完全依赖，传递依赖以及三种范式</strong></h4><h5 id="1-依赖关系"><a href="#1-依赖关系" class="headerlink" title="1.依赖关系"></a>1.依赖关系</h5><ol>
 <li><strong>部分函数依赖</strong>：设X,Y是关系R的两个属性集合，存在X→Y，若X’是X的真子集，存在X’→Y，则称Y部分函数依赖于X。</li>
 </ol>
