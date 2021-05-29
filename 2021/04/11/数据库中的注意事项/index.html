@@ -389,18 +389,18 @@
                   
                 
                 
-  <div id="twikoo"></div>
+  <div id="waline"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#comments', function() {
-      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/twikoo@1.3.0/dist/twikoo.all.min.js', function() {
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@waline/client@0.14.8/dist/Waline.min.js', function() {
         var options = Object.assign(
-          {"envId":"hello-cloudbase-8gc3v19v313835e2","region":"ap-shanghai","path":"window.location.pathname"},
+          {"serverURL":"https://comments-rouge.vercel.app","placeholder":"说点什么好呢？(*^ω^*)","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"avatarCDN":null,"avatarForce":false,"requiredFields":[],"emojiCDN":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili","emojiMaps":{},"anonymous":null},
           {
-            el: '#twikoo',
-            path: 'window.location.pathname'
+            el: '#waline',
+            path: window.location.pathname
           }
         )
-        twikoo.init(options)
+        new Waline(options);
       });
     });
   </script>
