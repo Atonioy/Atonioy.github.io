@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>计组注意事项</title>
+    <link href="/2021/05/31/%E8%AE%A1%E7%BB%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
+    <url>/2021/05/31/%E8%AE%A1%E7%BB%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
+    
+    <content type="html"><![CDATA[<h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.  基本概念"></a>1.  基本概念</h3><h4 id="1-位-bit"><a href="#1-位-bit" class="headerlink" title="1. 位(bit)"></a>1. 位(bit)</h4><p><strong>位是电子计算机中最小的数据单位</strong>。每一位的状态只有两种：0或1，在硬件上利用高电压和低电压两种信号实现；</p><h4 id="2-字节-Byte-B"><a href="#2-字节-Byte-B" class="headerlink" title="2.字节(Byte, B)"></a>2.字节(Byte, B)</h4><p><strong>字节由</strong>8个位组成，它是存储空间的基本计量单位；</p><h4 id="3-字"><a href="#3-字" class="headerlink" title="3.字"></a>3.字</h4><p>字由若干个字节组成。因此，字一定为字节的整数倍。字的位数称为字长（注意：字不等于字长乘以字节！字=字长×位）。比如一个8位的CPU，这里的8位指其字长为8位，即单位时间内可以处理8位二进制数，即一个字节数。现在的CPU大部分为64位，即单位时间内可以处理64位二进制数，即8个字节数；</p><h4 id="4-地址线"><a href="#4-地址线" class="headerlink" title="4.地址线"></a>4.地址线</h4><p>用于传输地址信息的数据线，一根地址线可以通过高电平或低电平来区分1或0，因此一根地址线有两个状态：1或0，那么N根地址线可以表示<img src="../img/pg/gif.latex" alt="2^n">个不同的状态。（也表示寻址范围)</p><h3 id="2-寻址范围的计算"><a href="#2-寻址范围的计算" class="headerlink" title="2.寻址范围的计算"></a>2.寻址范围的计算</h3><h4 id="1-按字节寻址"><a href="#1-按字节寻址" class="headerlink" title="1.按字节寻址"></a>1.按字节寻址</h4><p>   寻址范围与地址线根数有关，若有n根地址线，则寻址大小为<strong>2的n次</strong></p><blockquote><p> 设有一个1MB容量的存储器，字长32位，问：按字节编址，字编址的寻址范围以及各自的寻址范围大小? </p><p> 如果按字节编址，则 </p><p>​                 1MB = 2^20B </p><p>​                 1字节=1B=8bit </p><p>​                 2^20B/1B = 2^20 </p><p> 地址范围为0~(2^20)-1,也就是说需要二十根地址线才能完成对1MB空间的编码，所以地址寄存器为20位,寻址范围大小为2^20=1M</p></blockquote><h4 id="2-按字寻址"><a href="#2-按字寻址" class="headerlink" title="2.按字寻址"></a>2.按字寻址</h4><p>   寻址和地址线根数，字长有关，若有n根，字长为32位（4个字节),则寻址大小为<strong>2的n次方除以4</strong></p><blockquote><p>如果按字编址，则</p><p>​                  1MB=2^20B</p><p>​                  1字=32bit=4B</p><p>​                 2^20B/4B = 2^18   </p><p>  地址范围为0~2^18-1，也就是说我们至少要用18根地址线才能完成对1MB空间的编码。因此按字编址的寻址范围是2^18</p></blockquote><blockquote><p>某计算机字长为32，其存储容量为16MB，若按双字编址，它的寻址范围是多少</p><p>按双字变址，故为64位<br>16MB=16<em>1024</em>1024<em>8位，所以16MB可以寻址为：<br>(16</em>1024<em>1024</em>8)/64=2<em>1024</em>1024=2M,</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习笔记</category>
+      
+      <category>计算机组成原理</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>计算机组成原理</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>java之路</title>
     <link href="/2021/05/28/java%E4%B9%8B%E8%B7%AF/"/>
     <url>/2021/05/28/java%E4%B9%8B%E8%B7%AF/</url>
