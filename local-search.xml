@@ -4,9 +4,9 @@
   
   
   <entry>
-    <title>javascript基础语法学习</title>
-    <link href="/2021/06/11/javascript%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
-    <url>/2021/06/11/javascript%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
+    <title>Javascript语法学习</title>
+    <link href="/2021/06/14/Javascript%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    <url>/2021/06/14/Javascript%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
     
     <content type="html"><![CDATA[<p>1.一些html标签、事件的含义</p>  <head>代表该html文件的属性，<style>代表设置的样式格式  innerHTML在JS是双向功能：获取对象的内容 或 向对象插入内容；<p>如：<div id="aa">这是内容</div></p><p>我们可以通过 document.getElementById(‘aa’).innerHTML 来获取id为aa的对象的内嵌内容；<br>也可以对某对象插入内容，如 document.getElementById(‘abc’).innerHTML=’这是被插入的内容’;</p><p>2.一些注意事项</p><p>（1）对字符串和数字进行加法运算</p><p>​     如果两个数字相加，返回数字相加的和，如果数字与字符串相加，返回字符串。</p><p>（2）Undefined 和 Null</p><p>Undefined 这个值表示变量不含有值。可以通过将变量的值设置为 null 来清空变量。这两者的值相等，但数据类型不相同，所以并不绝对相等。</p><p>​    （3）在 JavaScript中，几乎所有的事物都是对象。javaScript 对象是键值对的容器，“键”必须为字符串，“值” 可以是 JavaScript 中包括 null 和 undefined 的任意数据类型。</p><p>对象也是一个变量，但对象可以包含多个值（多个变量），每个值以 <strong>name:value</strong> 对呈现。</p><blockquote><p>var car = {name:“Fiat”, model:500, color:“white”};</p></blockquote><p>在以上实例中，3 个值 (“Fiat”, 500, “white”) 赋予变量 car。JavaScript 对象是变量的容器。</p><p>（4）javaScript对象:属性和方法的容器;</p><p>对象的属性之间一定要用逗号隔开;</p><p>对象的方法定义了一个函数，并作为对象的属性存储。</p><p>对象方法通过添加 <strong>()</strong> 调用 (作为一个函数)。</p>]]></content>
     
