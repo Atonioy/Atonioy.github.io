@@ -206,7 +206,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.6k 字
     </span>
   
 
@@ -216,7 +216,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      18
        分钟
     </span>
   
@@ -258,7 +258,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年5月28日 下午
+                  本文最后更新于：2021年6月14日 下午
                 
               </p>
             
@@ -306,6 +306,7 @@
 <strong>1、第一范式（1NF）：一个关系模式R的所有属性都是不可分的基本数据项。</strong></p>
 <p><strong>2、第二范式（2NF）：满足第一范式，然后消除部分依赖。</strong></p>
 <p><strong>3、第三范式（3NF）： 满足第二范式，消除传递依赖。</strong></p>
+<p><strong>4、BC范式：满足第三范式，只有码在起决定作用。</strong></p>
 <hr>
 <h4 id="3-关系模型中各种键的定义和区别">3.<strong>关系模型中各种键的定义和区别</strong></h4>
 <p><strong>超键(super key):在关系中能唯一标识元组的属性集称为关系模式的超键</strong></p>
@@ -337,6 +338,24 @@
 <p><strong>主属性：候选码的中的一个属性。</strong></p>
 <blockquote>
 <p>选课（学号，课程号），此关系的候选码只有一个，为：【学号、课程号】，故主属性有：学号、课程号</p>
+</blockquote>
+<hr>
+<h4 id="4-求出关系模式的候选键">4.求出关系模式的候选键</h4>
+<p>[算法]：按以下步骤求候选键：<br>
+1.只在FD右部出现的属性，不属于候选码;<br>
+2.只在FD左部出现的属性，一定存在于某候选码当中;<br>
+3.外部属性一定存在于任何候选码当中;<br>
+4.其他属性逐个与2,3的属性组合，求属性闭包，直至X的闭包等于U,若等于U,则X为候选码。</p>
+<blockquote>
+<p>R&lt;U,F&gt;,U=(A,B,C,D,E,G),F={AB–&gt;C,CD–&gt;E,E–&gt;A.A–&gt;G},求候选码。</p>
+<p>因G只在右边出现,所以G一定不属于候选码;而B,D只在左边出现,所以B,D一定属于候选码;BD的闭包还是BD,则对BD进行组合,除了G以外,BD可以跟A,C,E进行组合<br>
+先看ABD<br>
+ABD本身自包ABD,而AB–&gt;C,CD–&gt;E,A–&gt;G,所以ABD的闭包为ABDCEG=U<br>
+再看BDC<br>
+CD–&gt;E,E–&gt;A,A–&gt;G,BDC本身自包,所以BDC的闭包为BDCEAG=U<br>
+最后看BDE<br>
+E–&gt;A,A–&gt;G,AB–&gt;C,BDE本身自包,所以BDE的闭包为BDEAGC=U</p>
+<p>因为(ABD)、(BCD)、(BDE)的闭包都是ABCDEG所以本问题的候选码有3个分别是ABC、BCD和BDE</p>
 </blockquote>
 
             </div>
@@ -407,7 +426,7 @@
     Fluid.utils.loadComments('#waline', function() {
       Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@waline/client@0.14.8/dist/Waline.min.js', function() {
         var options = Object.assign(
-          {"serverURL":"https://comments-rouge.vercel.app","placeholder":"说点什么好呢？(*^ω^*)","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"avatarCDN":null,"avatarForce":false,"requiredFields":[],"emojiCDN":null,"emojiMaps":{},"anonymous":null},
+          {"serverURL":"https://comments-rouge.vercel.app","placeholder":"说点什么好呢？(*^ω^*)","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"avatarCDN":null,"avatarForce":false,"requiredFields":[],"emojiCDN":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili","emojiMaps":{"bb_annoyed":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_annoyed.png","bb_antic":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_antic.png","bb_doge":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_doge.png","bb_think":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_think.png","bb_bye":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_bye.png","bb_flushed":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_flushed.png","bb_heart_eyes":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_heart_eyes.png","bb_kiss":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_kiss.png"},"anonymous":null},
           {
             el: '#waline',
             path: window.location.pathname

@@ -367,7 +367,7 @@
     Fluid.utils.loadComments('#waline', function() {
       Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@waline/client@0.14.8/dist/Waline.min.js', function() {
         var options = Object.assign(
-          {"serverURL":"https://comments-rouge.vercel.app","placeholder":"说点什么好呢？(*^ω^*)","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"avatarCDN":null,"avatarForce":false,"requiredFields":[],"emojiCDN":null,"emojiMaps":{},"anonymous":null},
+          {"serverURL":"https://comments-rouge.vercel.app","placeholder":"说点什么好呢？(*^ω^*)","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"avatarCDN":null,"avatarForce":false,"requiredFields":[],"emojiCDN":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili","emojiMaps":{"bb_annoyed":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_annoyed.png","bb_antic":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_antic.png","bb_doge":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_doge.png","bb_think":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_think.png","bb_bye":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_bye.png","bb_flushed":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_flushed.png","bb_heart_eyes":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_heart_eyes.png","bb_kiss":"https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili/bb_kiss.png"},"anonymous":null},
           {
             el: '#waline',
             path: window.location.pathname
