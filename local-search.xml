@@ -4,16 +4,43 @@
   
   
   <entry>
-    <title>Javascript语法学习</title>
-    <link href="/2021/06/14/Javascript%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
-    <url>/2021/06/14/Javascript%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
+    <title>收服CSS</title>
+    <link href="/2021/07/02/%E6%94%B6%E6%9C%8DCSS/"/>
+    <url>/2021/07/02/%E6%94%B6%E6%9C%8DCSS/</url>
     
-    <content type="html"><![CDATA[<p>1.一些html标签、事件的含义</p><p>如：<div id="aa">这是内容</div></p><p>我们可以通过 document.getElementById(‘aa’).innerHTML 来获取id为aa的对象的内嵌内容；<br>也可以对某对象插入内容，如 document.getElementById(‘abc’).innerHTML=’这是被插入的内容’;</p><p>2.一些注意事项</p><p>（1）对字符串和数字进行加法运算</p><p>​     如果两个数字相加，返回数字相加的和，如果数字与字符串相加，返回字符串。</p><p>（2）Undefined 和 Null</p><p>Undefined 这个值表示变量不含有值。可以通过将变量的值设置为 null 来清空变量。这两者的值相等，但数据类型不相同，所以并不绝对相等。</p><p>​    （3）在 JavaScript中，几乎所有的事物都是对象。javaScript 对象是键值对的容器，“键”必须为字符串，“值” 可以是 JavaScript 中包括 null 和 undefined 的任意数据类型。</p><p>对象也是一个变量，但对象可以包含多个值（多个变量），每个值以 <strong>name:value</strong> 对呈现。</p><blockquote><p>var car = {name:“Fiat”, model:500, color:“white”};</p></blockquote><p>在以上实例中，3 个值 (“Fiat”, 500, “white”) 赋予变量 car。JavaScript 对象是变量的容器。</p><p>（4）javaScript对象:属性和方法的容器;</p><p>对象的属性之间一定要用逗号隔开;</p><p>对象的方法定义了一个函数，并作为对象的属性存储。</p><p>对象方法通过添加 <strong>()</strong> 调用 (作为一个函数)。</p>]]></content>
+    <content type="html"><![CDATA[<p>​      内联式CSS：把css代码直接写在现有的HTML标签中，比如： <p style = "color : red ; font-size : 12px">文本</p></p><p>​      嵌入式CSS：就是可以把css样式代码写在<style type="text/css"></style>标签之间。如下面代码实现把三个<span>标签中的文字设置为红色： <style type="text/css"> span{ color:red; } </style> 嵌入式css样式必须写在<style></style>之间，并且一般情况下嵌入式css样式写在<head></head>之间。</p><p>​      外部式CSS:外部式css样式(也可称为外联式)就是把css代码写一个单独的外部文件中，这个css样式文件以“.css”为扩展名，在<head>内（不是在<style>标签内）使用<link>标签将css样式文件链接到HTML文件内，如下面代码： <link href="style.css" rel="stylesheet" type="text/css" /></p><p>​      注意： 1、css样式文件名称以有意义的英文字母命名，如 main.css。 2、rel=“stylesheet” type=“text/css” 是固定写法不可修改。 3、<link>标签位置一般写在<head>标签之内。 这三种样式是有优先级的，记住他们的优先级：内联式 &gt; 嵌入式 &gt; 外部式，但是嵌入式 &gt; 外部式有一个前堤：嵌入式CSS样式的位置一定在外部式的后面。 其实总结来说就是–就近原则(离被设置元素越近优先级越高)。 但注意上面所总结的优先级是有一个前提:内联式，嵌入式，外部式样式表中CSS样式相同权值的情况下。</p>]]></content>
     
     
     <categories>
       
-      <category>学习笔记</category>
+      <category>学习派</category>
+      
+      <category>CSS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CSS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>收服Javascript</title>
+    <link href="/2021/06/14/%E6%94%B6%E6%9C%8DJavascript/"/>
+    <url>/2021/06/14/%E6%94%B6%E6%9C%8DJavascript/</url>
+    
+    <content type="html"><![CDATA[<p>1.一些html标签、事件的含义</p><p>如：<div id="aa">这是内容</div></p><p>我们可以通过 document.getElementById(‘aa’).innerHTML 来获取id为aa的对象的内嵌内容；<br>也可以对某对象插入内容，如 document.getElementById(‘abc’).innerHTML=’这是被插入的内容’;</p><p>2.一些注意事项</p><p>（1）对字符串和数字进行加法运算</p><p>​     如果两个数字相加，返回数字相加的和，如果数字与字符串相加，返回字符串。</p><p>（2）Undefined 和 Null</p><p>Undefined 这个值表示变量不含有值。可以通过将变量的值设置为 null 来清空变量。这两者的值相等，但数据类型不相同，所以并不绝对相等。</p><p>​    （3）在 JavaScript中，几乎所有的事物都是对象。javaScript 对象是键值对的容器，“键”必须为字符串，“值” 可以是 JavaScript 中包括 null 和 undefined 的任意数据类型。</p><p>对象也是一个变量，但对象可以包含多个值（多个变量），每个值以 <strong>name:value</strong> 对呈现。</p><blockquote><p>var car = {name:“Fiat”, model:500, color:“white”};</p></blockquote><p>在以上实例中，3 个值 (“Fiat”, 500, “white”) 赋予变量 car。JavaScript 对象是变量的容器。</p><p>（4）javaScript对象:属性和方法的容器;</p><p>对象的属性之间一定要用逗号隔开;</p><p>对象的方法定义了一个函数，并作为对象的属性存储。</p><p>对象方法通过添加 <strong>()</strong> 调用 (作为一个函数)。</p><p>（5）assign(url):跳转到指定页面；</p><p>reload(true):刷新当前页面；</p><p>replace(url):用指定网址覆盖当前网页；</p><p>assign()和replace()的区别你可以理解为前者是打开新的页面，后者是覆盖原有页面</p><p>（6）Date对象方法中getDay() 方法可返回表示星期的某一天的数字。返回值是 0（周日） 到 6（周六） 之间的一个整数。getDate()获取当日日期</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习派</category>
       
       <category>Javascript</category>
       
@@ -59,7 +86,7 @@
     
     <categories>
       
-      <category>学习笔记</category>
+      <category>学习派</category>
       
       <category>计算机组成原理</category>
       
@@ -81,12 +108,12 @@
     <link href="/2021/05/28/java%E4%B9%8B%E8%B7%AF/"/>
     <url>/2021/05/28/java%E4%B9%8B%E8%B7%AF/</url>
     
-    <content type="html"><![CDATA[<p><img src="/img/pg/java%E5%AD%A6%E4%B9%A0.png" alt="java学习"></p><p>1.正在进行Javascript基础语法学习</p><p>​    学习开始时间：2021/6/7           学习结束时间:</p>]]></content>
+    <content type="html"><![CDATA[<p><img src="/img/pg/java%E5%AD%A6%E4%B9%A0.png" alt="java学习"></p><p>1.正在进行Javascript/html/css基础语法学习</p><p>​    学习开始时间：2021/6/7           学习结束时间:</p>]]></content>
     
     
     <categories>
       
-      <category>学习笔记</category>
+      <category>学习派</category>
       
       <category>Java</category>
       
@@ -113,7 +140,7 @@
     
     <categories>
       
-      <category>生活</category>
+      <category>生活派</category>
       
       <category>旅行</category>
       
@@ -140,7 +167,7 @@
     
     <categories>
       
-      <category>学习笔记</category>
+      <category>学习派</category>
       
       <category>项目</category>
       
@@ -167,7 +194,7 @@
     
     <categories>
       
-      <category>学习笔记</category>
+      <category>学习派</category>
       
       <category>数据库</category>
       
@@ -194,7 +221,7 @@
     
     <categories>
       
-      <category>生活</category>
+      <category>生活派</category>
       
       <category>旅行</category>
       
