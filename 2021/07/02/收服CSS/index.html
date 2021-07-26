@@ -206,7 +206,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      352 字
+      1.4k 字
     </span>
   
 
@@ -216,7 +216,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      15
        分钟
     </span>
   
@@ -258,15 +258,81 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年7月2日 晚上
+                  本文最后更新于：2021年7月26日 晚上
                 
               </p>
             
             <div class="markdown-body">
-              <p>​      内联式CSS：把css代码直接写在现有的HTML标签中，比如： <p style = "color : red ; font-size : 12px">文本</p></p>
-<p>​      嵌入式CSS：就是可以把css样式代码写在<style type="text/css"></style>标签之间。如下面代码实现把三个<span>标签中的文字设置为红色： <style type="text/css"> span{ color:red; } </style> 嵌入式css样式必须写在<style></style>之间，并且一般情况下嵌入式css样式写在<head></head>之间。</p>
-<p>​      外部式CSS:外部式css样式(也可称为外联式)就是把css代码写一个单独的外部文件中，这个css样式文件以“.css”为扩展名，在<head>内（不是在<style>标签内）使用<link>标签将css样式文件链接到HTML文件内，如下面代码： <link href="style.css" rel="stylesheet" type="text/css" /></p>
-<p>​      注意： 1、css样式文件名称以有意义的英文字母命名，如 main.css。 2、rel=“stylesheet” type=“text/css” 是固定写法不可修改。 3、<link>标签位置一般写在<head>标签之内。 这三种样式是有优先级的，记住他们的优先级：内联式 &gt; 嵌入式 &gt; 外部式，但是嵌入式 &gt; 外部式有一个前堤：嵌入式CSS样式的位置一定在外部式的后面。 其实总结来说就是–就近原则(离被设置元素越近优先级越高)。 但注意上面所总结的优先级是有一个前提:内联式，嵌入式，外部式样式表中CSS样式相同权值的情况下。</p>
+              <h3 id="1-CSS的引入方式">1.CSS的引入方式</h3>
+<h4 id="a-内联式CSS">a.  内联式CSS</h4>
+<p>把css代码直接写在现有的HTML标签中，比如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span> = <span class="hljs-string">&quot;color : red ; font-size : 12px&quot;</span>&gt;</span>文本<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h4 id="b-嵌入式CSS">b. 嵌入式CSS</h4>
+<p>就是可以把css样式代码写在</p>
+<style type="text/css"></style>标签之间。如下面代码实现把三个<span>标签中的文字设置为红色：
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/css&quot;</span>&gt;</span><span class="css"> <span class="hljs-selector-tag">span</span>&#123; <span class="hljs-attribute">color</span>:red; &#125; </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span> <br></code></pre></td></tr></table></figure>
+<h4 id="c-嵌入式css样式">c.嵌入式css样式</h4>
+<p>必须写在<style></style>之间，并且一般情况下嵌入式css样式写在<head></head>之间。</p>
+<h4 id="d-外部式CSS">d.外部式CSS</h4>
+<p>外部式css样式(也可称为外联式)就是把css代码写一个单独的外部文件中，这个css样式文件以“.css”为扩展名，在<head>内（不是在<style>标签内）使用<link>标签将css样式文件链接到HTML文件内，如下面代码：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;link <span class="hljs-attribute">href</span>=<span class="hljs-string">&quot;style.css&quot;</span> <span class="hljs-attribute">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attribute">type</span>=<span class="hljs-string">&quot;text/css&quot;</span> /&gt; <br></code></pre></td></tr></table></figure>
+<p>​         注意： 1、css样式文件名称以有意义的英文字母命名，如 main.css。 2、rel=“stylesheet” type=“text/css” 是固定写法不可修改。 3、<link>标签位置一般写在<head>标签之内。 这三种样式是有优先级的，记住他们的优先级：内联式 &gt; 嵌入式 &gt; 外部式，但是嵌入式 &gt; 外部式有一个前堤：嵌入式CSS样式的位置一定在外部式的后面。 其实总结来说就是–就近原则(离被设置元素越近优先级越高)。 但注意上面所总结的优先级是有一个前提:内联式，嵌入式，外部式样式表中CSS样式相同权值的情况下。</p>
+<h3 id=""></h3>
+<h3 id="2-CSS中的盒子模型">2.CSS中的盒子模型</h3>
+<h4 id="a-盒子模型中主要的区域：">a.<strong>盒子模型中主要的区域：</strong></h4>
+<p>盒子模型（块级元素）中主要包含元素的宽，高，外边距，边框，内边距以及实际内容。</p>
+<ul>
+<li>Width：主要区域的内容（content）的宽。</li>
+<li>Height：主要区域的内容（content）的宽。</li>
+<li>Margen：外边距。即整个元素和其他元素的距离。</li>
+<li>Border：元素的边框。</li>
+<li>Padding：内边距。即元素的边与内容的距离。</li>
+<li>Content：内容。也就是实际所看到的区域。</li>
+</ul>
+<p>下面的图片说明了盒子模型的区域：</p>
+<p><img src="/img/pg/1350478-20180318130200144-1334747621.gif" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>盒子模型的宽度、高度的计算</p>
+<p>而我们平常设置盒子的宽和高往往是指的内容的宽和高</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span>&#123;<span class="hljs-attribute">width</span>:<span class="hljs-number">200px</span>; <span class="hljs-attribute">height</span>:<span class="hljs-number">18px</span>;&#125;<br></code></pre></td></tr></table></figure>
+<p>此段话代表content所占大小为宽200像素，高为18像素；</p>
+<p>而当我们增加其他三个属性时</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">div</span>&#123;<br><span class="hljs-attribute">width</span>:<span class="hljs-number">200px</span>;<br><span class="hljs-attribute">height</span>:<span class="hljs-number">18px</span>;<br><span class="hljs-attribute">padding</span>:<span class="hljs-number">20px</span>;<br> <span class="hljs-attribute">border</span>:<span class="hljs-number">1px</span> solid red;<br><span class="hljs-attribute">margin</span>:<span class="hljs-number">10px</span>; &#125;<br></code></pre></td></tr></table></figure>
+<p>效果图为：</p>
+<p><img src="/img/pg/20180716195205144" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>所以说当改变盒子四个属性中的任何一个的时候，盒子的总面积都会有所改变。</p>
+<p>最后，盒子总大小的计算公式为：盒子的实际高度X盒子的实际宽度。</p>
+<p><strong>元素实际宽度（盒子的宽度）=左边界+左边框+左填充+内容宽度+右填充+右边框+右边界。</strong></p>
+<p><strong>元素实际宽度（盒子的高度）=上边界+上边框+上填充+内容高度+下填充+下边框+下边界。</strong></p>
+<h4 id="b-盒子模型注意事项">b.盒子模型注意事项</h4>
+<p>​    需注意margin是用来隔开元素与元素的间距;padding是用来隔开元素与内容的间隔。margin用于布局分开元素使元素与元素互不干扰;padding用于元素与内容之间的间隔，让内容与元素之间有一段距离。</p>
+<p>当元素的 padding（填充）内边距被清除时，所释放的区域将会受到元素背景颜色的填充。</p>
+<p>单独使用 padding 属性可以改变上下左右的填充。</p>
+<p><img src="/img/pg/VlwVi.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h4 id="c-css什么时候需要清除浮动？">c.<strong>css什么时候需要清除浮动？</strong></h4>
+<p>当父元素没有设置宽度或者高度的时，又需要子元素撑开父元素的时候需要清除浮动。</p>
+<p>如何清除浮动</p>
+<p>我们说的清除浮动是指清除由于子元素浮动带来父元素高度塌陷的影响。</p>
+<p>解决子盒子浮动父盒子塌陷的问题：</p>
+<p>1.给父盒子添加overflow：hidden属性。[常用]</p>
+<p>2.让父盒子也浮动（前提是父盒子的宽度为100%）。</p>
+<p>3.在父容器的最后添加一个高度为0的空div并且添加clear：both属性。</p>
+<p>4.使用伪对象选择器：：after生成一个空的元素</p>
+<h4 id="d-块级元素">d.块级元素</h4>
+<ol>
+<li>
+<p>标准流模型中的块级盒子，默认宽度是100%；而浮动的块级盒子，宽度不会自动伸展，而是由内容(文字、padding)撑开。浮动后的行级元素会变成块级元素， 可以设置宽度高度等属性值。</p>
+</li>
+<li>
+<p>text-align: center;文字水平居中。 line-height:（与div设置的高度相同）；垂直居中,因为line-height是行高属性，比如设置这个属性高度为35px，你的字体就会被安放在这个高度的中间高度显示，就像居中一样</p>
+</li>
+<li>
+<p>设置display:block就是将元素显示为块级元素。如下代码就是将内联元素a转换为块状元素，从而使a元素具有块状元素特点。a{display:block;}</p>
+</li>
+</ol>
+<p>块级元素特点：</p>
+<p>1、每个块级元素都从新的一行开始，并且其后的元素也另起一行。（真霸道，一个块级元素独占一行）</p>
+<p>2、元素的高度、宽度、行高以及顶和底边距都可设置。</p>
+<p>3、元素宽度在不设置的情况下，是它本身父容器的100%（和父元素的宽度一致），除非设定一个宽度。</p>
 
             </div>
             <hr>
@@ -302,6 +368,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/07/26/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">网络是怎样连接的</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
