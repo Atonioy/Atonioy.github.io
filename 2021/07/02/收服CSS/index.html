@@ -216,7 +216,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      15
        分钟
     </span>
   
@@ -268,13 +268,12 @@
 <p>把css代码直接写在现有的HTML标签中，比如：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span> = <span class="hljs-string">&quot;color : red ; font-size : 12px&quot;</span>&gt;</span>文本<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h4 id="b-嵌入式CSS">b. 嵌入式CSS</h4>
-<p>就是可以把css样式代码写在</p>
-<style type="text/css"></style>标签之间。如下面代码实现把三个<span>标签中的文字设置为红色：
+<p>就是可以把css样式代码写在style标签之间。如下面代码实现把三个span标签中的文字设置为红色：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/css&quot;</span>&gt;</span><span class="css"> <span class="hljs-selector-tag">span</span>&#123; <span class="hljs-attribute">color</span>:red; &#125; </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span> <br></code></pre></td></tr></table></figure>
 <h4 id="c-嵌入式css样式">c.嵌入式css样式</h4>
 <p>必须写在<code>&lt;style&gt;&lt;/style&gt;</code>之间，并且一般情况下嵌入式css样式写在<code>&lt;head&gt;&lt;/head&gt;</code>之间。</p>
 <h4 id="d-外部式CSS">d.外部式CSS</h4>
-<p>外部式css样式(也可称为外联式)就是把css代码写一个单独的外部文件中，这个css样式文件以“.css”为扩展名，<code>在&lt;head&gt;内（不是在&lt;style&gt;标签内）使用&lt;link&gt;标签将css样式文件链接到HTML文件内</code>，如下面代码：</p>
+<p>外部式css样式(也可称为外联式)就是把css代码写一个单独的外部文件中，这个css样式文件以“.css”为扩展名，在head标签内（不是在style标签内）使用link标签将css样式文件链接到HTML文件内，如下面代码：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;link <span class="hljs-attribute">href</span>=<span class="hljs-string">&quot;style.css&quot;</span> <span class="hljs-attribute">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attribute">type</span>=<span class="hljs-string">&quot;text/css&quot;</span> /&gt; <br></code></pre></td></tr></table></figure>
 <p>​         注意： 1、css样式文件名称以有意义的英文字母命名，如 main.css。 2、rel=“stylesheet” type=“text/css” 是固定写法不可修改。 3、<code>&lt;link&gt;标签位置一般写在&lt;head&gt;标签之内</code>。 这三种样式是有优先级的，记住他们的优先级：内联式 &gt; 嵌入式 &gt; 外部式，但是嵌入式 &gt; 外部式有一个前堤：嵌入式CSS样式的位置一定在外部式的后面。 其实总结来说就是–就近原则(离被设置元素越近优先级越高)。 但注意上面所总结的优先级是有一个前提:内联式，嵌入式，外部式样式表中CSS样式相同权值的情况下。</p>
 <h3 id=""></h3>
@@ -369,7 +368,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/26/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84/">
+                      <a href="/2021/07/26/%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">协议栈如何处理数据</span>
                         <span class="visible-mobile">上一篇</span>
