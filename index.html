@@ -202,7 +202,7 @@
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2021/07/26/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84/" target="_self">
-          <img src="/img/wg/1.jpg" srcset="/img/loading.gif" lazyload alt="网络是怎样连接的">
+          <img src="/img/wg/1.jpg" srcset="/img/loading.gif" lazyload alt="协议栈如何处理数据">
         </a>
       </div>
     
@@ -210,7 +210,7 @@
       <h1 class="index-header">
         
         <a href="/2021/07/26/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84/" target="_self">
-          网络是怎样连接的
+          协议栈如何处理数据
         </a>
       </h1>
 
@@ -220,7 +220,13 @@
           
             
           
-          
+          协议栈如何处理数据
+(1)创建套接字
+从应用程序收到委托后，协议栈通过TCP协议收发数据的操作可以分为4个阶段。首先是创建套接字，在这个阶段，有协议栈的内部结构、套接字的实体，以及创建套接字的操作过程。
+(2)连接服务器
+接下来是客户端套接字向服务器套接字进行连接的阶段。
+(3)收发数据
+两端的套接字完成连接之后，就进人收发消息的阶段了。在这个阶段,协议栈会将从应用程序收到的数据切成小块并发送给服
         </a>
       </p>
 
