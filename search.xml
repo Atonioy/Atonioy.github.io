@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>遍历Map的四种方式</title>
+      <link href="/2021/10/06/%E9%81%8D%E5%8E%86Map%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+      <url>/2021/10/06/%E9%81%8D%E5%8E%86Map%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Entry">Entry</h3><p>由于Map中存放的元素均为键值对，故每一个键值对必然存在一个映射关系。<br>Map中采用Entry内部类来表示一个映射项，映射项包含Key和Value (我们总说键值对键值对, 每一个键值对也就是一个Entry)<br>Map.Entry里面包含getKey()和getValue()方法</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;Map.Entry&lt;Integer, Integer&gt;&gt; it&#x3D;map.entrySet().iterator();</span><br><span class="line">    while(it.hasNext()) &#123;</span><br><span class="line">        Map.Entry&lt;Integer,Integer&gt; entry&#x3D;it.next();</span><br><span class="line">        int key&#x3D;entry.getKey();</span><br><span class="line">        int value&#x3D;entry.getValue();</span><br><span class="line">        System.out.println(key+&quot; &quot;+value);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h3 id="entrySet">entrySet</h3><p>entrySet是 java中 键-值 对的集合，Set里面的类型是Map.Entry，一般可以通过map.entrySet()得到。</p><p>entrySet实现了Set接口，里面存放的是键值对。一个K对应一个V。<br>用来遍历map的一种方法。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;Map.Entry&lt;String, String&gt;&gt; entryseSet&#x3D;map.entrySet();</span><br><span class="line">for (Map.Entry&lt;String, String&gt; entry:entryseSet) &#123;</span><br><span class="line">System.out.println(entry.getKey()+&quot;,&quot;+entry.getValue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>即通过getKey（）得到K，getValue得到V。</p><h3 id="keySet">keySet</h3><p>还有一种是keySet, keySet是键的集合，Set里面的类型即key的类型</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; set &#x3D; map.keySet();</span><br><span class="line">for (String s:set) &#123;</span><br><span class="line">System.out.println(s+&quot;,&quot;+map.get(s));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="四种遍历Map方式">四种遍历Map方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">Map&lt;String, String&gt; map &#x3D; new HashMap&lt;String, String&gt;();</span><br><span class="line">map.put(&quot;1&quot;, &quot;value1&quot;);</span><br><span class="line">map.put(&quot;2&quot;, &quot;value2&quot;);</span><br><span class="line">map.put(&quot;3&quot;, &quot;value3&quot;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第一种：普遍使用，二次取值</span><br><span class="line">System.out.println(&quot;通过Map.keySet遍历key和value：&quot;);</span><br><span class="line">for (String key : map.keySet()) &#123;</span><br><span class="line">    System.out.println(&quot;key&#x3D; &quot;+ key + &quot; and value&#x3D; &quot; + map.get(key));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第二种</span><br><span class="line">System.out.println(&quot;通过Map.entrySet使用iterator遍历key和value：&quot;);</span><br><span class="line">Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it &#x3D; map.entrySet().iterator();</span><br><span class="line">while (it.hasNext()) &#123;</span><br><span class="line">    Map.Entry&lt;String, String&gt; entry &#x3D; it.next();</span><br><span class="line">    System.out.println(&quot;key&#x3D; &quot; + entry.getKey() + &quot; and value&#x3D; &quot; + entry.getValue());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第三种：推荐，尤其是容量大时</span><br><span class="line">System.out.println(&quot;通过Map.entrySet遍历key和value&quot;);</span><br><span class="line">for (Map.Entry&lt;String, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">    System.out.println(&quot;key&#x3D; &quot; + entry.getKey() + &quot; and value&#x3D; &quot; + entry.getValue());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第四种</span><br><span class="line">System.out.println(&quot;通过Map.values()遍历所有的value，但不能遍历key&quot;);</span><br><span class="line">for (String v : map.values()) &#123;</span><br><span class="line">    System.out.println(&quot;value&#x3D; &quot; + v);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java的容器类及区别</title>
+      <link href="/2021/10/05/java%E7%9A%84%E5%AE%B9%E5%99%A8%E7%B1%BB%E5%8F%8A%E5%8C%BA%E5%88%AB/"/>
+      <url>/2021/10/05/java%E7%9A%84%E5%AE%B9%E5%99%A8%E7%B1%BB%E5%8F%8A%E5%8C%BA%E5%88%AB/</url>
+      
+        <content type="html"><![CDATA[<h3 id="分类：大类型主要分为以下两种类型">分类：大类型主要分为以下两种类型</h3><p>１）Collection：一个独立元素的序列，这些元素都服从一条或者多条规则。 List必须按照插入的顺序保存元素，而set不能有重复的元素。Queue按照排队规则来确定对象产生的顺序（通常与它们被插入的顺序相同）。</p><p>2）Map：一组成对的“键值对”对象，允许你使用键来查找值。</p><img src="/img/pg/col.png" alt="col" style="zoom:75%;" /><h3 id="具体区别">具体区别</h3><p>Collection是最基本的集合接口，一个Collection代表一组Object，即Collection的元素（Elements）。一些Collection允许相同的元素而另一些不行。一些能排序而另一些不行。Java SDK不提供直接继承自Collection的类，Java SDK提供的类都是继承自Collection的“子接口”如List和Set。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">主要方法:</span><br><span class="line">boolean add(0bject o) 添加对象到集合</span><br><span class="line">boolean remove (0bject o)删除指定的对象</span><br><span class="line">int size()返回当前集合中元素的数量</span><br><span class="line">boolean contains (0bject 0)查找集合中是否有指定的对象</span><br><span class="line">boolean isEmpty()判断集合是否为空</span><br><span class="line">Iterator iterator()返回- 一个迭代器</span><br><span class="line">boolean containsAll(Collection c)查找集合中是否有集合c中的元素</span><br><span class="line">boolean addAll(Collection c)将集合c中所有的元素添加给该集合</span><br><span class="line">void clear()删除集合中所有元素</span><br><span class="line">void removeAll(Collection c)从集合中删除c集合中也有的元素</span><br><span class="line">void retainAll(Collection c)从集合中删除集合c中不包含的元素</span><br></pre></td></tr></table></figure><h4 id="List接口">List接口</h4><p>实现List接口的常用类有LinkedList，ArrayList，Vector和Stack。</p><p>共同点：</p><p>​      LinkedList、ArrayList都实现了List接口，都是不同步的，线程不安全，元素是有序的、可重复。</p><p>1）LinkedList类</p><p>​     基于链表的数据结构，允许null元素，增加、删除、修改元素方面效率比ArrayList高。   此外LinkedList提供额外的get，remove，insert方法在 LinkedList的首部或尾部。这些操作使LinkedList可被用作堆栈（stack），队列（queue）或双向队列（deque）。</p><p><strong>注意:LinkedList没有同步方法。如果多个线程同时访问一个List，则必须自己实现访问同步。一种解决方法是在创建List时构造一个同步的List：List list = Collections.synchronizedList(new LinkedList(…));</strong></p><p>2)ArrayList类</p><p>基于数组的数据结构，不同步，线程不安全，查询（get set）效率高。</p><p>size，isEmpty，get，set方法运行时间为常数。但是add方法开销为分摊的常数，添加n个元素需要O(n)的时间。其他的方法运行时间为线性。每个ArrayList实例都有一个容量（Capacity），即用于存储元素的数组的大小。这个容量可随着不断添加新元素而自动增加，但是增长算法并没有定义。当需要插入大量元素时，在插入前可以调用ensureCapacity方法来增加ArrayList的容量以提高插入效率。</p><p><strong>如果涉及到堆栈，队列等操作，应该考虑用List，对于需要快速插入，删除元素，应该使用LinkedList，如果需要快速随机访问元素，应该使用ArrayList。</strong></p><h4 id="Array和ArrayList的区别及各自适用的场景">Array和ArrayList的区别及各自适用的场景</h4><p>Array是数组，ArrayList是Array的加强版。</p><p>（1）array可以保存基本类型和对象类型，arrayList只能保存对象类型</p><p>（2）array数组的大小是固定的不能更改，而ArrayList的大小可以改变</p><p>（3）Array数组在存放的时候一定是同种类型的元素。ArrayList就不一定了，因为ArrayList可以存储Object。</p><p>（4）ArrayList有更加丰富的方法如addAll（）、removeAll()、iterator()</p><p>适用场景：</p><p>如果想要保存一些在整个程序运行期间都会存在而且不变的数据，我们可以将它们放进一个全局数组里，但是如果我们单纯只是想要以数组的形式保存数据，而不经常对数据进行增加等操作，只是方便我们进行查找的话，那么，我们就选择ArrayList。如果我们需要对元素进行频繁的移动或删除，或者是处理的是超大量的数据，那么，使用ArrayList就真的不是一个好的选择，因为它的效率很低，可以考虑选LinkedList。</p><p>3）Vector类</p><p>Vector非常类似ArrayList，但是Vector是同步的。由Vector创建的Iterator，虽然和ArrayList创建的 Iterator是同一接口，但是，因为Vector是同步的，当一个 Iterator被创建而且正在被使用，另一个线程改变了Vector的状态（例如，添加或删除了一些元素），这时调用Iterator的方法时将抛出 ConcurrentModificationException，因此必须捕获该异常。</p><p>4）Stack 类</p><p>Stack继承自Vector，实现一个后进先出的堆栈。Stack提供5个额外的方法使得Vector得以被当作堆栈使用。基本的push和pop方法，还有 peek方法得到栈顶的元素，empty方法测试堆栈是否为空，search方法检测一个元素在堆栈中的位置。Stack刚创建后是空栈。</p><h4 id="Set接口">Set接口</h4><p>共同点:元素不重复</p><p><strong>1）HashSet类</strong></p><p>-&gt;不保证集合中元素的顺序</p><p>-&gt;允许包含值为null的元素，但最多只能有一个null元素。</p><p><strong>2）TreeSet</strong></p><p>TreeSet描述的是Set的一种变体——可以实现排序等功能的集合，它在将对象元素添加到集合中时会自动按照某种比较规则将其插入到有序的对象序列中，并保证该集合元素组成的对象序列时刻按照“升序”排列。所以我们在使用TreeSet时候，里面装的元素一定是有序的，否则就不应该选择TreeSet。</p><p><strong>3)LinkedSet</strong></p><p>集合元素按插入顺序排列。</p><p>适用场景：</p><p>HashSet使用哈希表实现的，元素是无序的。添加、删除操作时间复杂度都是O(1)。TreeSet内部结构是一个树结构(红黑树)，元素是有序的，添加、删除操作时间复杂度为O(log(n))，并且提供了first(), last(), headSet(), tailSet()等方法来处理有序集合。</p><p>LinkedHashSet是介于HashSet 和 TreeSet之间，内部是一个双向链表结构，所以它的插入是有序的，时间复杂度是O(1)。</p><p>简而言之,如何你需要的是一个快速的集合，建议你使用HashSet，如果你需要的是一个排序集合，请选择TreeSet，如果你需要一套能够存储插入顺序的集合,请使用LinkedHashSet。</p><h4 id="Map集合接口">Map集合接口</h4><p>Map没有继承Collection接口，Map提供key到value的映射。一个Map中不能包含相同的key，每个key只能映射一个 value。Map接口提供3种集合的视图，Map的内容可以被当作一组key集合，一组value集合，或者一组key-value映射。</p><p><strong>HashTable和HashMap区别</strong></p><p>第一、继承不同。</p><p>public class Hashtable extends Dictionary implements Map</p><p>public class HashMap extends AbstractMap implements Map</p><p>第二、Hashtable 中的方法是同步的，而HashMap中的方法在缺省情况下是非同步的。在多线程并发的环境下，可以直接使用Hashtable，但是要使用HashMap的话就要自己增加同步处理了。</p><p>第三、Hashtable中，key和value都不允许出现null值。在HashMap中，null可以作为键，这样的键只有一个；可以有一个或多个键所对应的值为null。<strong>当get()方法返回null值时，即可以表示 HashMap中没有该键，也可以表示该键所对应的值为null。因此，在HashMap中不能由get()方法来判断HashMap中是否存在某个键， 而应该用containsKey()方法来判断。</strong></p><p>第四、两个遍历方式的内部实现上不同。Hashtable、HashMap都使用了 Iterator。而由于历史原因，Hashtable还使用了Enumeration的方式。</p><p>第五、哈希值的使用不同，HashTable直接使用对象的hashCode。而HashMap重新计算hash值。</p><p>hashCode是jdk根据对象的地址或者字符串或者数字算出来的int类型的数值。</p><p>Hashtable计算hash值，直接用key的hashCode()，而HashMap重新计算了key的hash值，Hashtable在求hash值对应的位置索引时，用取模运算，而HashMap在求位置索引时，则用与运算，且这里一般先用hash&amp;0x7FFFFFFF后，再对length取模，&amp;0x7FFFFFFF的目的是为了将负的hash值转化为正值，因为hash值有可能为负数，而&amp;0x7FFFFFFF后，只有符号外改变，而后面的位都不变。</p><p>第六，内部实现使用的数组初始化和扩容方式不同。</p><p>HashTable在不指定容量的情况下的默认容量为11，而HashMap为16，Hashtable不要求底层数组的容量一定要为2的整数次幂，而HashMap则要求一定为2的整数次幂。</p><p>Hashtable扩容时，将容量变为原来的2倍加1，而HashMap扩容时，将容量变为原来的2倍。</p><p>前面分析了，Hashtable 的扩容方法是乘2再+1，不是简单的乘2，故hashtable保证了容量永远是奇数，结合之前分析hashmap的重算hash值的逻辑，就明白了，因为在数据分布在等差数据集合(如偶数)上时，如果公差与桶容量有公约数 n，则至少有(n-1)/n 数量的桶是利用不到的，故之前的hashmap 会在取模（使用位与运算代替）哈希前先做一次哈希运算，调整hash值。这里hashtable比较古老，直接使用了除留余数法，那么就需要设置容量起码不是偶数（除（近似）质数求余的分散效果好）。而JDK开发者选了11。</p><p>适用场景：</p><p>HashMap和Hashtable都实现了Map接口，但决定用哪一个之前先要弄清楚它们之间的分别。主要的区别有：线程安全性，同步(synchronization)，以及速度。</p><p>1、由于HashMap非线程安全，在只有一个线程访问的情况下，效率要高于HashTable</p><p>2、HashMap允许将null作为一个entry的key或者value，而Hashtable不允许。</p><p>3、HashMap把Hashtable的contains方法去掉了，改成containsValue和containsKey。因为contains方法容易让人引起误解。</p><p>4、Hashtable继承自陈旧的Dictionary类，而HashMap是Java1.2引进的Map 的一个实现。</p><p>5、两者通过hash值散列到hash表的算法不一样，HashTbale是古老的除留余数法，直接使用hashcode，而后者是强制容量为2的幂，重新根据hashcode计算hash值，在使用hash 位与 （hash表长度 – 1），也等价取膜，但更加高效，取得的位置更加分散，偶数，奇数保证了都会分散到。前者就不能保证。</p><p>6、另一个区别是HashMap的迭代器(Iterator)是fail-fast迭代器，而Hashtable的enumerator迭代器不是fail-fast的。所以当有其它线程改变了HashMap的结构（增加或者移除元素），将会抛出ConcurrentModificationException，但迭代器本身的remove方法移除元素则不会抛出ConcurrentModificationException异常。但这并不是一个一定发生的行为，要看JVM。这条同样也是Enumeration和Iterator的区别。</p><p>fail-fast和iterator迭代器相关。如果某个集合对象创建了Iterator或者ListIterator，然后其它的线程试图“结构上”更改集合对象，将会抛出ConcurrentModificationException异常。但其它线程可以通过set方法更改集合对象是允许的，因为这并没有从“结构上”更改集合。但是假如已经从结构上进行了更改，再调用set方法，将会抛出IllegalArgumentException异常。</p><p>结构上的更改指的是删除或者插入一个元素，这样会影响到map的结构。</p><p>该条说白了就是在使用迭代器的过程中有其他线程在结构上修改了map，那么将抛出ConcurrentModificationException，这就是所谓fail-fast策略。</p><p>3）WeakHashMap类</p><p>WeakHashMap是一种改进的HashMap，它对key实行“弱引用”，如果一个key不再被外部所引用，那么该key可以被GC回收。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java中的小芝士</title>
+      <link href="/2021/09/25/java%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%8A%9D%E5%A3%AB/"/>
+      <url>/2021/09/25/java%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%8A%9D%E5%A3%AB/</url>
+      
+        <content type="html"><![CDATA[<h3 id="JAVA-构造方法和get，set方法的区别与联系">JAVA 构造方法和get，set方法的区别与联系</h3><p>联系：<br>都可以给对象赋值，都可以访问private私有属性<br>区别：<br>构造方法是一次性用品，是初始化对象的时候调用的，而get/set方法则可以多次修改对象的属性<br>构造方法赋值的时候可以不加引用，如：new 类名( , , , ,)，直接可以开辟空间，而get/set方法必须要有引用<br>最终要的一点是在属性私有化的时候，setget方法可以实现从外部类对属性的访问</p><h3 id="怎么判断两个对象是否为同一个对象">怎么判断两个对象是否为同一个对象</h3><h4 id="equals（）">equals（）</h4><p>equals（）是Object中的方法，比较的对象的内存地址</p><h4 id="hashCode（）">hashCode（）</h4><p>比较的哈希码中的索引位置。可以快速定位对象的物理位置，能提高查找效率。</p><p>equals（）相等，hashCode（）一定相等<br>hashCode（）不相等，equals（）一定不相同<br>hashCode（）相等，equals不一定相等</p><h4 id="equals（）和hashCode（）">equals（）和hashCode（）</h4><ul><li><p>​         java中相同对象有两个：1、引用地址符都相同的对象属于同一个对象  2、所指对象的内容完全一致属于同一个对象</p></li><li><p>​         比较两个自定义对象是否属于同一个对象时，我们要重写自定义对象中的equals()方法，否则，当使用equals（）比较时，会自动去调用Object类中的equals（）方法，而Object类中的equals（）方法实则是比较两个对象的引用地址符是否相当，而不会去比较内容是否相等，这样两个不同的的自定义的对象比较时，永远返回的是false.</p></li></ul><blockquote><p>​        在hashSet中使用，hashset是元素无序，不重复的集合。先有一个例子看一下其实hashSet也是可以添加重复元素的。</p><p>​        看这个结果hashSet无序倒是体现出来了，但是里面为什么被添加了重复元素？难道是hashSet元素不可以重复是错误？当然不是啦！首先我们分析一下hashSet中我们是怎么添加元素的，由上图可见我们每次添加的对象都是new出来的，使用new就是创建一个对象，既然每次都创建了一个新的对象，hashCode（）可能就不相同，hashSet自然就把他们当做不同对象添加到集合里面啦。那么对于自定义对象我们才能保持不重复呢？如下：重写自定义对象的equals（）和hashCode（）来比较对象内容后</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Override &#x2F;&#x2F;重写hashcode</span><br><span class="line">public int hashCode () &#123;</span><br><span class="line">return this .getId () +this . getName () . hashCode () ;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;重写equals()</span><br><span class="line">@Override</span><br><span class="line">public boolean equals (object obj) &#123;</span><br><span class="line">if (this&#x3D;&#x3D;obj)   &#123;return true ;&#125;</span><br><span class="line">        if (obj instanceof Items) &#123;</span><br><span class="line">Items i &#x3D; (Items) obj ;</span><br><span class="line">if (this.getId()&#x3D;&#x3D; i.getId () &amp;&amp;this.getName().equals(i.getName()))                   &#123;return true ; &#125;</span><br><span class="line">else    &#123; return false ;&#125;</span><br><span class="line">&#125;</span><br><span class="line">else  &#123;return false ;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="Java堆内存和栈内存的区别">Java堆内存和栈内存的区别</h3><blockquote><ol><li>栈：为编译器自动分配和释放，如函数参数、局部变量、临时变量等等</li><li>堆：为成员分配和释放，由程序员自己申请、自己释放。否则发生内存泄露。典型为使用new申请的堆内容</li><li>静态存储区：内存在程序编译的时候就已经分配好，这块内存在程序的整个运行期间都存在。它主要存放静态数据、全局数据和常量。</li></ol></blockquote><p>1.不论对象什么时候创建，他都会存储在堆内存中，栈内存包含它的引用。栈内存只包含原始值变量好和堆中对象变量的引用。</p><p>2.存储在堆中的对象是全局可以被访问的，然而栈内存不能被其他线程所访问。</p><h3 id="引用和对象的关系">引用和对象的关系</h3><p>​      因为在java中对象是没有名字的，所以我们是用引用变量来控制某某类型的对象的， 即通过引用变量来调用这个对象中的成员(成员变量,成员方法).</p><p>Vehicle veh1 = new Vehicle(); 通常把这条语句的动作称之为创建一个对象，其实，它包含了四个动作。</p><p>​      1.new Vehicle，是以Vehicle类为模板，在堆空间里创建一个Vehicle类型的对象（简称为Vehicle对象）。<br>​      2.末尾的()意味着，在对象创建后，立即调用Vehicle类的构造函数,根据括号中有无参数进而来调用相应Vehicle类中的构造方法,对刚生成的对象进行初始化。</p><p>​      3.Vehicle veh 表示在栈中创建了一个Vehicle类型的引用变量。即Vehicle类型的引用。他的作用是可以指向Vehicle类型的对象.即他可以存储Vehicle类型对象在堆中的地址。</p><p>​      4.“=”操作符的作用是使引用变量指向刚刚创建的那个Vehicle对象。或者说将对象在堆中的地址赋值给引用变量<br>即使对象和引用变量之间关联起来。</p><h3 id="LinkedHashMap和HashMap的区别">LinkedHashMap和HashMap的区别</h3><p>区别：</p><ul><li>LinkedHashMap是继承于HashMap，是基于HashMap和双向链表来实现的。</li><li>HashMap无序；LinkedHashMap有序，可分为插入顺序和访问顺序两种。如果是访问顺序，那put和get操作已存在的Entry时，都会把Entry移动到双向链表的表尾(其实是先删除再插入)。</li><li>LinkedHashMap存取数据，还是跟HashMap一样使用的Entry[]的方式，双向链表只是为了保证顺序。</li><li>LinkedHashMap是线程不安全的。</li></ul><p>应用场景：</p><p>​    HashMap是无序的，当我们希望有顺序地去存储key-value时，就需要使用LinkedHashMap了。</p><h3 id="Java中的强制类型转换">Java中的强制类型转换</h3><p><strong>1 ) 整数 int 转换成字串 String , 有三种方法 :</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String s &#x3D; String.valueOf(i);</span><br><span class="line">String s &#x3D; Integer.toString(i);</span><br><span class="line">String s &#x3D; &quot;&quot; + i;</span><br></pre></td></tr></table></figure><p><strong>2 ) String 转 int</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int i &#x3D; Integer.parseInt([String]);</span><br><span class="line">i &#x3D; Integer.parseInt([String],[int radix]);</span><br><span class="line">int i &#x3D; Integer.valueOf(my_str).intValue();</span><br></pre></td></tr></table></figure><p><strong>3 ) 布尔类型 转 String</strong></p><ol><li>第一种方法</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">boolean bool &#x3D; true;</span><br><span class="line">String s &#x3D; new Boolean(bool).toString();&#x2F;&#x2F;将bool利用对象封装器转化为对象</span><br></pre></td></tr></table></figure><ol start="2"><li>第二种方法</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">boolean bool &#x3D; true; </span><br><span class="line"></span><br><span class="line">String s &#x3D; String.valueOf( bool );</span><br></pre></td></tr></table></figure><p><strong>4 ) String 转 Date</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">导入 java.util.Date date&#x3D;null;</span><br><span class="line"></span><br><span class="line">date&#x3D;java.sql.Date.valueOf(String s);</span><br></pre></td></tr></table></figure><p><strong>5 ) 数字类型间的转换</strong></p><p>转型有两种: 向上转型和向下转型(强制转型)<br>两种分别如下:<br>第一种是向上转型<br>对于基础数据类型 , 可以自动转型 ,比如:<br>int a = 10;<br>long b = a;<br>这里就是把int型转成了long型 , 因为 long范围比int大 , 这样的转型不会有任何影响 , 所以可以自动转型</p><p>第二种是向下转型 , 也就是强制<br>这种需要强转 , 比如<br>long a = 10 ;<br>int b = (int) a;<br>通过 (int)可以强制转型 , 但是这样会丢失精度 , 比如a如果超过了b的范围 , 那么强转成int型, 只会等于int的最大值</p><p>又如 : int a = ( int ) 8.8 ;</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java容器的遍历</title>
+      <link href="/2021/09/23/java%E5%AE%B9%E5%99%A8%E7%9A%84%E9%81%8D%E5%8E%86/"/>
+      <url>/2021/09/23/java%E5%AE%B9%E5%99%A8%E7%9A%84%E9%81%8D%E5%8E%86/</url>
+      
+        <content type="html"><![CDATA[<h3 id="迭代器">迭代器</h3><h4 id="迭代器的介绍">迭代器的介绍</h4><p>迭代器是用于遍历集合中的元素的一种方式。Java集合框架中的迭代器是Iterator接口，该接口位于java.util包下</p><h4 id="迭代器的创建和使用">迭代器的创建和使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;Object&gt; it&#x3D; c.iterator();&#x2F;&#x2F;获取迭代器对象</span><br></pre></td></tr></table></figure><h5 id="hasNext-方法">hasNext()方法</h5><p>hasNext()方法的作用：判断集合中是否还有元素，如果还有元素可以迭代，则返回true，否则返回false。</p><h5 id="next-方法">next()方法</h5><p>next()方法作用：返回集合中下一个集合元素。该方法一般和hasNext()方法结合使用，当hasNext()方法判断还有下一个元素时，则可以使用next()方法获取到集合元素。</p><h3 id="使用迭代器遍历">使用迭代器遍历</h3><h4 id="迭代器-KeySet">迭代器 KeySet</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Private  HashMap &lt;Items,Integer&gt; goods&#x3D; new HashMap&lt;Items,integer&gt; (); &#x2F;&#x2F;获取商品集合，（integer是一种int的包装类，须实例化使用；Items是商品类）</span><br><span class="line"></span><br><span class="line"> Set&lt;Items&gt; keys&#x3D;goods.keyset();获取键的集合；</span><br><span class="line"> Iterator&lt;Items&gt; it&#x3D;keys.iterator();获取迭代器对象；</span><br><span class="line"> while(it.hasNext())&#123;</span><br><span class="line">   Items i&#x3D;it.Next(); 获取商品对象</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><h4 id="迭代器-EntrySet">迭代器 EntrySet</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private  Hashmap&lt;Items,Integer&gt; goods&#x3D;new Hashmap&lt;Items,Integer&gt;();&#x2F;&#x2F;创建商品集合对象</span><br><span class="line">  Set&lt;Items,Integer&gt; entrys&#x3D;goods.entryset(); 获取键值对集合</span><br><span class="line">  Interator it&#x3D;entrys.Interator();</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="使用Foreach遍历">使用Foreach遍历</h3><p>foreach语句语法类型如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(元素类型x 元素变量y :遍历对象z)&#123;</span><br><span class="line">    遍历元素变量y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">list.add(&quot;a&quot;);</span><br><span class="line">list.add(&quot;b&quot;);</span><br><span class="line">list.add(&quot;c&quot;);</span><br><span class="line">for(String y :list)&#123;</span><br><span class="line">    System.out.println(y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="三种遍历方式的区别">三种遍历方式的区别</h3><h4 id="条件差别">条件差别</h4><p>for需要知道数组或者集合的大小，而且需要有序的，不然无法遍历；</p><p>foreach和iterator不需要知道数组或者集合的大小，他们都是得到集合内的每一个元素然后进行处理；</p><h4 id="多态差别">多态差别</h4><p>for和foreach都需要知道自己的集合类型，甚至要知道自己集合内的元素类型，不能实现多态。这个使用的语法上都可以表示出来。</p><p>Iterator是一个接口类型，它不关心集合的类型和集合内的元素类型，因为它是通过hasnext和next来进行下一个元素的判断和获取，这一切都是在集合类型定义的时候就完成的事情。迭代器统一了对容器的访问模式，这也是对接口解耦的最好表现。</p><h4 id="用法差别">用法差别</h4><p>for一般可以用于简单的顺序集合，并且可以预测集合的大小；</p><p>foreach可以遍历任何集合或者数组，但是使用者需要知道遍历元素的类型。</p><p>iterator是最强大的，它可以随之修改元素内部的元素。可以在遍历的时刻用remove（）！！！！我的意思是其他两个都不可以！！！</p><p>而且iterator不需要知道元素类型和元素大小，通过hasnext（）判断是否遍历完所有元素。</p><p>而且在对范型的集合进行遍历的时候，iterator是不二的选择，就是因为不需要知道元素类型便可以遍历。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>计算机网络概述</title>
+      <link href="/2021/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/"/>
+      <url>/2021/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-计算机网络性能指标">1.计算机网络性能指标</h3>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Servlet学习</title>
+      <link href="/2021/09/16/Servlet%E5%AD%A6%E4%B9%A0/"/>
+      <url>/2021/09/16/Servlet%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="什么是servlet">什么是servlet</h3><p>​    在 JavaWeb 项目中，处理请求和发送响应的过程是由一种叫做 Servlet 的程序来完成的，并且 Servlet 是为了解决实现动态页面而衍生的东西。</p><p>简单来讲：Servlet其实就是一个遵循Servlet开发的java类，Serlvet是由服务器调用的，运行在服务器端。</p><h3 id="Tomcat-和-Servlet-的关系">Tomcat 和 Servlet 的关系</h3><p>​     Tomcat 是Web应用服务器，是一个Servlet/JSP容器。 Tomcat 作为 Servlet 容器，负责处理客户请求,把请求传送给 Servlet，并将 Servlet 的响应传送回给客户，而 Servlet 是一种运行在支持 Java 语言的服务器上的组件。</p><p>①：Tomcat 将 Http 请求文本接收并解析，然后封装成 HttpServletRequest 类型的 request 对象，所有的 Http 头数据读可以通过request 对象调用对应的方法查询到。</p><p>②：Tomcat 同时会要响应的信息封装为 HttpServletResponse 类型的response 对象，通过设置 response 属性就可以控制要输出到浏览器的内容，然后将 response 交给 Tomcat，Tomcat 就会将其变成响应文本的格式发送给浏览器。</p><p>Java Servlet API 是Servlet容器(tomcat)和servlet之间的接口，它定义了Serlvet 的各种方法，还定义了 Servlet 容器传送给 Servlet 的对象类，其中最重要的就是 ServletRequest 和 ServletResponse 。所以说我们在编写Servlet时，需要实现 Servlet 接口，按照其规范进行操作。</p><h3 id="编写servlet">编写servlet</h3><p><strong>我们要继承 HttpServlet类 那么问题来了，继承HttpServlet 和实现Servlet 有什么区别？</strong></p><p>首先，直观的不同，Servlet 是一个接口，如果实现这个接口，那么就必须实现接口里面定义的所有方法。</p><p>而 HttpServlet 实现了 Servlet 接口，并把 Servlet 接口中的方法实现了。<br>继承 Httpservelt，实际上也就实现了 Servlet 接口。</p><p>但是我们没必要再去实现 Servlet 中定义的生命周期方法，因为在 Httpservlet 中已经有了默认实现，并且这些默认实现也挺规范和实用， doget 和 dopost 是执行用户请求的终点，get 请求会调用 doget 方法，post 请求会执行 dopost 方法，我们可以在这2个方法中定义我们自己的业务逻辑。</p><p>最后，HttpServlet 在实现 Servlet 接口的时候，已经实现了 Servlet 中所有的方法，因此继承自 HttpSrvlet 的类，不需要再去覆写相应的生命周期等方法。</p><h4 id="编写Java类，继承HttpServlet">编写Java类，继承HttpServlet</h4><p>创建一个 MyServlet java 类，继承 HttpServlet 实现 service 方法：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//设置字符编码</span></span><br><span class="line">        request.setCharacterEncoding(<span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">        <span class="comment">//从 request 对象中获取username,password</span></span><br><span class="line">        String username = request.getParameter(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        String password = request.getParameter(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        request.setAttribute(<span class="string">&quot;username&quot;</span>,username);</span><br><span class="line">        request.setAttribute(<span class="string">&quot;password&quot;</span>,password);</span><br><span class="line">        request.getRequestDispatcher( <span class="string">&quot;/index2.jsp&quot;</span>).forward(request, response);;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="配置web-xml文件">配置web.xml文件</h4><p>web.xml 配置 Servlet 访问路径，能让别人通过链接访问到你的 Servlet：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;web-app&gt;</span><br><span class="line">  &lt;display-name&gt;Archetype Created Web Application&lt;&#x2F;display-name&gt;</span><br><span class="line"></span><br><span class="line">    &lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;MyServlet&lt;&#x2F;servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;club.sscai.demo.MyServlet&lt;&#x2F;servlet-class&gt;</span><br><span class="line">    &lt;&#x2F;servlet&gt;</span><br><span class="line"></span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;MyServlet&lt;&#x2F;servlet-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;&#x2F;MyServlet&lt;&#x2F;url-pattern&gt;</span><br><span class="line">    &lt;&#x2F;servlet-mapping&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;web-app&gt;</span><br></pre></td></tr></table></figure><h4 id="jsp-界面显示">jsp 界面显示</h4><p>index2.jsp:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h2&gt;2222222&lt;&#x2F;h2&gt;</span><br><span class="line">username: &lt;%&#x3D;request.getParameter(&quot;username&quot;) %&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">password: &lt;%&#x3D;request.getParameter(&quot;password&quot;) %&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure><h4 id="总结">总结</h4><p>前台界面附带的参数，可以通过 request 获取，这也证实了前面 <strong>HttpServletRequest 封装了 request对象，当客户端通过HTTP协议访问服务器时，HTTP请求头中的所有信息都封装在这个对象中。</strong></p><p>关于 request\response，在实际项目开发中，request 是非常常用的，毕竟你要拿到用户请求的信息，才能知道用户要什么，但是，像上文中这种继承自 HttpServlet 是不会出现的，例如，采用 Spring MVC 框架后，自动帮我们实现了 <strong>request 请求到 Controller</strong> 的骚操作。</p><p>servlet中out.write()和out.print()的区别</p><p>重载的print方法可将各种类型的数据转换成字符串的形式输出，而重载的write方法只能输出字符、字符数组和字符串等与字符相关的数据</p><p>字符串比较之中“==”和equals()的区别？</p><p>==：比较的是两个字符串内存地址的数值是否相等，属于数值比较；</p><p>equals()：比较的是两个字符串的内容，属于内容比较。</p><p>以后进行字符串相等判断的时候都使用equals()</p><h3 id="ServletContext与ServletConfig的详解及区别">ServletContext与ServletConfig的详解及区别</h3><h4 id="servletContext详解">servletContext详解</h4><p>​      ServletContext是servlet与servlet容器之间的直接通信的接口。Servlet容器在启动一个Web应用时，会为它创建一个servletContext对象。每个web应用有唯一的servletContext对象。同一个web应用的所有servlet对象共享一个serveltContext,servlet对象可以通过它来访问容器中的各种资源。该接口获取的是web应用的初始化信息。</p><h4 id="servletConfig详解">servletConfig详解</h4><p>​      Servlet容器初始化一个servlet对象时，会为这个servlet对象创建一个servletConfig对象。在servletConfig对象中包含了servlet的初始化参数信息。此外，servletConfig对象还与servletContext对象关联。Servlet容器在调用servlet对象的init(ServletConfig config)方法时，会把servletConfig对象当做参数传递给servlet对象。Init(ServletConfig config)方法会使得当前servlet对象与servletConfig对象建立关联关系。</p><h4 id="二者区别">二者区别</h4><p>首先从作用范围来说，ServletConfig作用于某个特定的Servlet，即从该Servlet实例化，那么就开始有效，但是该Servlet之外的其他Servlet不能访问；ServletContext作用于某个web应用，即在一个web应用中相当于一个全局对象，在Servlet容器启动时就已经加载，对于不同的web应用，有不同的ServletContext。</p><p>其次，来看一下二者参数的使用。如果一个参数为整个web应用所用，那么就配置为ServletContext参数，如下所示：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;context-param&gt;</span><br><span class="line">  &lt;param-name&gt;encoding&lt;&#x2F;param-name&gt;</span><br><span class="line">  &lt;param-value&gt;gb2312&lt;&#x2F;param-value&gt;</span><br><span class="line">&lt;&#x2F;context-param&gt;</span><br></pre></td></tr></table></figure><p>如果一个参数仅为一个Servlet所用，那么就应该配置为ServletConfig参数，如下所示：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">  &lt;servlet-name&gt;affice_add&lt;&#x2F;servlet-name&gt;</span><br><span class="line">  &lt;servlet-class&gt;servlet.Affice_add&lt;&#x2F;servlet-class&gt;</span><br><span class="line">  &lt;init-param&gt;</span><br><span class="line">   &lt;param-name&gt;filepath&lt;&#x2F;param-name&gt;</span><br><span class="line">   &lt;param-value&gt;&#x2F;webContent&#x2F;affice&lt;&#x2F;param-value&gt;</span><br><span class="line">  &lt;&#x2F;init-param&gt;</span><br><span class="line">&lt;&#x2F;servlet&gt;</span><br></pre></td></tr></table></figure><h3 id="5-Servlet中文编码问题">5.Servlet中文编码问题</h3><p>实际遇到更多的乱码情况是浏览器接收响应数据的乱码， 所以我们要做的使响应所回送数据所用字符集 和 浏览器用来解析回送数据所用字符集相同。</p><p>设置浏览器的解码格式：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">response.setHeader(<span class="string">&quot;content-type&quot;</span>,<span class="string">&quot;text/html;charset=UTF-8&quot;</span>);</span><br><span class="line"><span class="comment">//或</span></span><br><span class="line">response.setContentType(<span class="string">&quot;text/html;charset=utf-8&quot;</span>);</span><br></pre></td></tr></table></figure><p>大白话说就是用 content-type 响应头，告诉浏览器我回送过来的数据时 text/html 类型，要用 UTF-8 字符集解码；</p><p>设置好浏览器用于解析响应回送数据的字符集后，现在要设置响应回送的数据字符集，分为两种情况，也就是最开始提到的，处理字节和字符流数据是有差异的：</p><ol><li>使用 response.getWriter() 流写出的的数据乱码解决方式：</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置将发送到客户端的响应 的字符编码，只能用于设置 getWritet()的字符编码</span></span><br><span class="line">response.setCharactEncoding(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line"><span class="comment">//同时设置浏览器的解码方式</span></span><br><span class="line">response.setHeader(<span class="string">&quot;content-type&quot;</span>,<span class="string">&quot;text/html;charset=UTF-8&quot;</span>);</span><br></pre></td></tr></table></figure><blockquote><p>需要在调用 getWriter() 方法前 和 响应提交前使用</p></blockquote><ol><li>使用 response.getOutputStream() 流写出的数据乱码解决方式：</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//服务端对字符进行编码的时候，指定编码方式</span></span><br><span class="line">response.getOutputStream().write(<span class="string">&quot;汉字&quot;</span>.getBytes(<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line"><span class="comment">//同时设置浏览器的解码方式</span></span><br><span class="line">response.setHeader(<span class="string">&quot;content-type&quot;</span>,<span class="string">&quot;text/html;charset=UTF-8&quot;</span>);</span><br></pre></td></tr></table></figure><blockquote><p>字符响应流只用用来输出字符，而字节响应流可以用来输出任何东西</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> Servlet </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Servlet </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Jsp技术</title>
+      <link href="/2021/07/30/Jsp%E6%8A%80%E6%9C%AF/"/>
+      <url>/2021/07/30/Jsp%E6%8A%80%E6%9C%AF/</url>
+      
+        <content type="html"><![CDATA[<h3 id="什么是Java-Server-Pages">什么是Java Server Pages?</h3><p>​    JSP全称Java Server Pages，是一种动态网页开发技术。它使用JSP标签在HTML网页中插入Java代码。标签通常以&lt;%开头以%&gt;结束。</p><p>JSP是一种Java servlet，主要用于实现Java web应用程序的用户界面部分。网页开发者们通过结合HTML代码、XHTML代码、XML元素以及嵌入JSP操作和命令来编写JSP。</p><p>JSP通过网页表单获取用户输入数据、访问数据库及其他数据源，然后动态地创建网页。</p><p>JSP标签有多种功能，比如访问数据库、记录用户选择信息、访问JavaBeans组件等，还可以在不同的网页中传递控制信息和共享信息。</p><h3 id="表单的两种提交方式get和post">表单的两种提交方式get和post</h3><p>定义在<code>&lt;form action=&quot;dologin.jsp&quot; name=&quot;loginForm&quot; method=&quot;提交方式***&quot;&gt;&lt;/form&gt;</code>   动作／名称等顺序无所谓。<br>1.get：以【明文】方式，通过URL提交数据，数据在URL中【可以看到】。提交数据最多不超过【2KB】。安全性较低，但效率比post方式高。适合提交数据量不大，且安全要求不高的数据：比如：搜索、查询等功能。<br>2.post：将用户提交的信息封装在HTML HEADER内。适合提交数据量大，安全性高的用户信息。如：注册、修改、上传等功能。</p><h3 id="request请求">request请求</h3><p><strong>request对象：<strong>客户端的</strong>一次请求</strong>（JSP页面通过request对象请求服务器跳转某一页面，只在该页面中有效，其他页面这个request对象无作用）信息被封装在request对象中，通过它才能了解到客户的需求，然后做出响应。它是<strong>HttpServletRequest类</strong>的实例。request对象具有<strong>请求域</strong>，即完成客户端的请求之前，该对象一直有效。</p><p>客户端向服务端传参的方式：</p><p>1.通过表单 post、get方式。</p><blockquote><p>request.setCharacterEncoding(utf-8)解决中文乱码</p></blockquote><p>2.通过URL地址传</p><blockquote><p>service.xml中   设置<code>&lt;connector  URLEncoding=&quot;utf-8&quot;  &gt;</code> 解决中文乱码为防止出现提交表单后产生中文乱码问题，应该在request接收参数之前添加指令<br>&lt;request.setCharacterEncoding(“utf-8”);&gt;<br>注：request.setCharacterEncoding方法无法解决通过URL传递参数所产生的中文乱码问题，可修改Tomcat目录下的conf文件夹下server.xml中&lt;<code>Connector&gt;</code>标签后加入 URLEncoding = “utf-8”</p></blockquote><p>问：用request的getParameterValues获取数组元素并输出。</p><p>在传值页面设置多选项的name一致。比如说都叫favorite。<br>在取值页面用jsp操作如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">    String [] favorites &#x3D; reqquest.getParameterValues(&quot;favorite&quot;);&#x2F;&#x2F;设置string数组接收数组数据。</span><br><span class="line">    for(int i&#x3D;0;i&lt;favorites.length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        out.println(favorites[i]+&quot;&amp;nbsp;&amp;nbsp;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure><p>Ps1：String getParameter(String name)//获取单个参数值<br>Ps2：String[] getParameterValues(String name)//获取多个参数值，如获取checkbox的值<br>Ps3：request.setCharacterEncoding(“utf-8”);//解决post请求传递中文参数的乱码问题，设置的编码要与发送请求的页面的编码设置的一致。但是无法解决URL链接传递中文参数的乱码问题<br>Ps4：tomcat/conf/server.xml;//解决get请求和URL链接传递中文参数的乱码问题，可将Connector的URIEncoding=“UTF-8”<br>Ps5：href=“request.jsp?user=李四”//里面写值的时候可以不需要引号//所谓的url传参，就是利用get提交的方法拼接一个带参数的url提交给一个接受的jsp页面，这个jsp页面写在最前面，如上</p><h3 id="out对象">out对象</h3><p>一、什么是缓冲区<br>1、缓冲区：Buffer，所谓缓冲区就是内存的一块区域，用来保存临时数据<br>2、IO输出最原始的就是一个字节一个字节输出，效率很低。缓冲区可以先将多个字节读出来，再一次性的输出，提高效率<br>二、out对象<br>1、out对象是JspWriter类的实例，是向客户端（这里指浏览器）输出内容的常用对象。<br>2、常用方法：<br>· void println()向客户端打印字符<br>· void clear()清除缓冲区的内容。如果在flush之后调用，会抛出异常<br>· void clearBuffer() 也是清除缓冲区内容，但在flush之后不会抛出异常<br>· void flush()将缓冲区内容输出到客户端</p><h3 id="JSP内置对象——请求转发与请求重定向的区别">JSP内置对象——请求转发与请求重定向的区别</h3><p>一、请求重定向：服务端response.sendRedirect(“xx.jsp”)重定向。【客户端行为】：即客户端会访问两次，第一次访问后会立即跳转到第二个重定向页面上，【从本质上讲等于两次请求】，而前一次的请求封装的request对象不会保存，地址栏的URL地址会改变。<br>二、请求转发：服务端request.getRequestDispatcher(“xx.jsp”).forward(request,response)请求转发。forward(request,response)用于保存内置对象request和response。【服务器行为】：服务器会代替客户端去访问转发页面，【从本质是一次请求】，转发后请求对象会保存，地址栏的URL地址不会改变。</p><h3 id="什么是session">什么是session</h3><p>1、session表示客户端与服务器的一次会话<br>2、Web中的session指：用户在浏览某个网站时，从进入网站到浏览器关闭所经过的这段时间，也就是用户浏览网站所花费的时间。<br>3、从上述定义中可以看到，session实际是一个【特定的时间概念】<br>4、服务器的内存中，保存着同用户的session。不同的用户有不同的session。</p><h3 id="session的生命周期-活动">session的生命周期 活动</h3><p>某次会话当中通过超链接打开的新页面属于同一次会话<br>只要当前会话页面没有全部关闭，重新打开新的浏览器窗口访问同意项目资源时属于同一次会话。<br>除非本次会话的所有页面都关闭后再重新访问某个新的jsp或者servlet将会创建新的会话。<br>注意事项：<br>注意原有的会话还存在，只是这个旧的sessionId仍然存在于服务器端，只不过再也没有客户端会携带它然后交予服务器端校验<br>session销毁的三种方式：<br>1:调用session.invalidate()方法<br>2：session过期（超时）<br>3;服务器重新启动<br>设置session超时的两种方式：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tomcat默认session超时时间为30分钟</span><br><span class="line">1：session.setMaxInactiveInterval(时间);&#x2F;&#x2F;单位是秒</span><br><span class="line">2:在web.xml配置</span><br><span class="line">&lt;session-config&gt;</span><br><span class="line">&lt;session-timeout&gt;</span><br><span class="line">10</span><br><span class="line">&lt;session-timeout&gt;</span><br><span class="line">&lt;session-config&gt; &#x2F;&#x2F;单位是分钟</span><br></pre></td></tr></table></figure><p>一、http协议的无状态性<br>1、无状态是指，当浏览器发送请求给服务器的时候，服务器会响应。但当同一个浏览器再次发送请求时，服务器不会知道是刚才那个浏览器。<br>2、简单说，服务器【不会保存用户状态】，不会记得客户端是否访问过，所以这就是无状态协议</p><p>jsp状态管理<br>保存用户状态的两大机制<br>1、Session<br>2、Cookie<br>什么是cookie？<br>cookie：是web服务器保存在客户端的一系列文本信息。<br>典型应用一：判断注册用户是否已经登录网站。<br>典型应用二：保存用户浏览记录。<br>cookie的作用：<br>1、对特定对象的追踪。<br>2、保存用户网页浏览记录与习惯。<br>3、简化登录<br>安全风险：容易泄露用户信息</p><p>session与cookie对比<br>1.保存位置：session在服务器端内存，cookie在客户端文本<br>2.保存对象：session保存Object类（保存对象大小没有限制），cookie保存String类型（保存对象大小有限制）<br>3.生存权：session会话结束即销毁，cookie可以长期保存在客户端<br>4.重要性：session安全性更高，保存重要信息，cookie保存不重要的信息</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> Jsp </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Jsp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>协议栈如何处理数据</title>
+      <link href="/2021/07/26/%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE/"/>
+      <url>/2021/07/26/%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE/</url>
+      
+        <content type="html"><![CDATA[<h3 id="协议栈如何处理数据">协议栈如何处理数据</h3><p>(1)创建套接字</p><p>从应用程序收到委托后，协议栈通过TCP协议收发数据的操作可以分为4个阶段。首先是创建套接字，在这个阶段，有协议栈的内部结构、套接字的实体，以及创建套接字的操作过程。</p><p>(2)连接服务器</p><p>接下来是客户端套接字向服务器套接字进行连接的阶段。</p><p>(3)收发数据</p><p>两端的套接字完成连接之后，就进人收发消息的阶段了。在这个阶段,协议栈会将从应用程序收到的数据切成小块并发送给服务器，考虑到通信过程中可能会出错导致网络包丢失，协议栈还需要确认切分出的每个包是否已经送达服务器，对于没有送达的包要重新发送一次。</p><p>(4)从服务器断开连接并删除套接字<br>收发消息的操作全部结束之后，接下来要断开服务器的连接并删除套接字。断开操作的本质是当消息收发完成后客户端和服务器相互进行确认的过程</p><p>(5)IP与以太网的包收发操作<br>在介绍TCP协议收发消息的操作之后，我们再来看看实际的网络包是如何进行收发的。协议栈会与网卡进行配合，将数据切分成小块并封装成网络包，再将网络包转换成电信号或者光信号发送出去。</p><p>(6)用UDP协议收发数据的操作<br>TCP协议有很多方便的功能，比如网络包出错丢失时可以重发，因此很多应用程序都是使用TCP协议来收发数据的，但这些方便的功能也有帮倒忙的时候，在这种情况下我们还有另外一种叫UDP的协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSS</title>
+      <link href="/2021/07/02/CSS/"/>
+      <url>/2021/07/02/CSS/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-CSS的引入方式">1.CSS的引入方式</h3><h4 id="a-内联式CSS">a.  内联式CSS</h4><p>把css代码直接写在现有的HTML标签中，比如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p style &#x3D; &quot;color : red ; font-size : 12px&quot;&gt;文本&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure><h4 id="b-嵌入式CSS">b. 嵌入式CSS</h4><p>就是可以把css样式代码写在style标签之间。如下面代码实现把三个span标签中的文字设置为红色：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt; span&#123; color:red; &#125; &lt;&#x2F;style&gt; </span><br></pre></td></tr></table></figure><h4 id="c-嵌入式css样式">c.嵌入式css样式</h4><p>必须写在<code>&lt;style&gt;&lt;/style&gt;</code>之间，并且一般情况下嵌入式css样式写在<code>&lt;head&gt;&lt;/head&gt;</code>之间。</p><h4 id="d-外部式CSS">d.外部式CSS</h4><p>外部式css样式(也可称为外联式)就是把css代码写一个单独的外部文件中，这个css样式文件以“.css”为扩展名，在head标签内（不是在style标签内）使用link标签将css样式文件链接到HTML文件内，如下面代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link href&#x3D;&quot;style.css&quot; rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; &#x2F;&gt; </span><br></pre></td></tr></table></figure><p>​         注意： 1、css样式文件名称以有意义的英文字母命名，如 main.css。 2、rel=“stylesheet” type=“text/css” 是固定写法不可修改。 3、<code>&lt;link&gt;标签位置一般写在&lt;head&gt;标签之内</code>。 这三种样式是有优先级的，记住他们的优先级：内联式 &gt; 嵌入式 &gt; 外部式，但是嵌入式 &gt; 外部式有一个前堤：嵌入式CSS样式的位置一定在外部式的后面。 其实总结来说就是–就近原则(离被设置元素越近优先级越高)。 但注意上面所总结的优先级是有一个前提:内联式，嵌入式，外部式样式表中CSS样式相同权值的情况下。</p><h3 id=""></h3><h3 id="2-CSS中的盒子模型">2.CSS中的盒子模型</h3><h4 id="a-盒子模型中主要的区域：">a.<strong>盒子模型中主要的区域：</strong></h4><p>盒子模型（块级元素）中主要包含元素的宽，高，外边距，边框，内边距以及实际内容。</p><ul><li>Width：主要区域的内容（content）的宽。</li><li>Height：主要区域的内容（content）的宽。</li><li>Margen：外边距。即整个元素和其他元素的距离。</li><li>Border：元素的边框。</li><li>Padding：内边距。即元素的边与内容的距离。</li><li>Content：内容。也就是实际所看到的区域。</li></ul><p>下面的图片说明了盒子模型的区域：</p><p><img src="/img/pg/1350478-20180318130200144-1334747621.gif" alt="img"></p><p>盒子模型的宽度、高度的计算</p><p>而我们平常设置盒子的宽和高往往是指的内容的宽和高</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div&#123;width:200px; height:18px;&#125;</span><br></pre></td></tr></table></figure><p>此段话代表content所占大小为宽200像素，高为18像素；</p><p>而当我们增加其他三个属性时</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">div&#123;</span><br><span class="line">width:200px;</span><br><span class="line">height:18px;</span><br><span class="line">padding:20px;</span><br><span class="line"> border:1px solid red;</span><br><span class="line">margin:10px; &#125;</span><br></pre></td></tr></table></figure><p>效果图为：</p><p><img src="/img/pg/20180716195205144" alt="img"></p><p>所以说当改变盒子四个属性中的任何一个的时候，盒子的总面积都会有所改变。</p><p>最后，盒子总大小的计算公式为：盒子的实际高度X盒子的实际宽度。</p><p><strong>元素实际宽度（盒子的宽度）=左边界+左边框+左填充+内容宽度+右填充+右边框+右边界。</strong></p><p><strong>元素实际宽度（盒子的高度）=上边界+上边框+上填充+内容高度+下填充+下边框+下边界。</strong></p><h4 id="b-盒子模型注意事项">b.盒子模型注意事项</h4><p>​    需注意margin是用来隔开元素与元素的间距;padding是用来隔开元素与内容的间隔。margin用于布局分开元素使元素与元素互不干扰;padding用于元素与内容之间的间隔，让内容与元素之间有一段距离。</p><p>当元素的 padding（填充）内边距被清除时，所释放的区域将会受到元素背景颜色的填充。</p><p>单独使用 padding 属性可以改变上下左右的填充。</p><p><img src="/img/pg/VlwVi.png" alt="img"></p><h4 id="c-css什么时候需要清除浮动？">c.<strong>css什么时候需要清除浮动？</strong></h4><p>当父元素没有设置宽度或者高度的时，又需要子元素撑开父元素的时候需要清除浮动。</p><p>如何清除浮动</p><p>我们说的清除浮动是指清除由于子元素浮动带来父元素高度塌陷的影响。</p><p>解决子盒子浮动父盒子塌陷的问题：</p><p>1.给父盒子添加overflow：hidden属性。[常用]</p><p>2.让父盒子也浮动（前提是父盒子的宽度为100%）。</p><p>3.在父容器的最后添加一个高度为0的空div并且添加clear：both属性。</p><p>4.使用伪对象选择器：：after生成一个空的元素</p><h4 id="d-块级元素">d.块级元素</h4><ol><li><p>标准流模型中的块级盒子，默认宽度是100%；而浮动的块级盒子，宽度不会自动伸展，而是由内容(文字、padding)撑开。浮动后的行级元素会变成块级元素， 可以设置宽度高度等属性值。</p></li><li><p>text-align: center;文字水平居中。 line-height:（与div设置的高度相同）；垂直居中,因为line-height是行高属性，比如设置这个属性高度为35px，你的字体就会被安放在这个高度的中间高度显示，就像居中一样</p></li><li><p>设置display:block就是将元素显示为块级元素。如下代码就是将内联元素a转换为块状元素，从而使a元素具有块状元素特点。a{display:block;}</p></li></ol><p>块级元素特点：</p><p>1、每个块级元素都从新的一行开始，并且其后的元素也另起一行。（真霸道，一个块级元素独占一行）</p><p>2、元素的高度、宽度、行高以及顶和底边距都可设置。</p><p>3、元素宽度在不设置的情况下，是它本身父容器的100%（和父元素的宽度一致），除非设定一个宽度。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> CSS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CSS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Javascript</title>
+      <link href="/2021/06/14/Javascript/"/>
+      <url>/2021/06/14/Javascript/</url>
+      
+        <content type="html"><![CDATA[<p>1.一些html标签、事件的含义</p><p>如：<div id="aa">这是内容</div></p><p>我们可以通过 document.getElementById(‘aa’).innerHTML 来获取id为aa的对象的内嵌内容；<br>也可以对某对象插入内容，如 document.getElementById(‘abc’).innerHTML=’这是被插入的内容’;</p><p>2.一些注意事项</p><p>（1）对字符串和数字进行加法运算</p><p>​     如果两个数字相加，返回数字相加的和，如果数字与字符串相加，返回字符串。</p><p>（2）Undefined 和 Null</p><p>Undefined 这个值表示变量不含有值。可以通过将变量的值设置为 null 来清空变量。这两者的值相等，但数据类型不相同，所以并不绝对相等。</p><p>​    （3）在 JavaScript中，几乎所有的事物都是对象。javaScript 对象是键值对的容器，“键”必须为字符串，“值” 可以是 JavaScript 中包括 null 和 undefined 的任意数据类型。</p><p>对象也是一个变量，但对象可以包含多个值（多个变量），每个值以 <strong>name:value</strong> 对呈现。</p><blockquote><p>var car = {name:“Fiat”, model:500, color:“white”};</p></blockquote><p>在以上实例中，3 个值 (“Fiat”, 500, “white”) 赋予变量 car。JavaScript 对象是变量的容器。</p><p>（4）javaScript对象:属性和方法的容器;</p><p>对象的属性之间一定要用逗号隔开;</p><p>对象的方法定义了一个函数，并作为对象的属性存储。</p><p>对象方法通过添加 <strong>()</strong> 调用 (作为一个函数)。</p><p>（5）assign(url):跳转到指定页面；</p><p>reload(true):刷新当前页面；</p><p>replace(url):用指定网址覆盖当前网页；</p><p>assign()和replace()的区别你可以理解为前者是打开新的页面，后者是覆盖原有页面</p><p>（6）Date对象方法中getDay() 方法可返回表示星期的某一天的数字。返回值是 0（周日） 到 6（周六） 之间的一个整数。getDate()获取当日日期</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> Javascript </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Javascript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>markdown-it渲染器测试</title>
+      <link href="/2021/06/03/markdown-it%E6%B8%B2%E6%9F%93%E5%99%A8%E8%A1%A8%E6%83%85%E6%B5%8B%E8%AF%95/"/>
+      <url>/2021/06/03/markdown-it%E6%B8%B2%E6%9F%93%E5%99%A8%E8%A1%A8%E6%83%85%E6%B5%8B%E8%AF%95/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-表情">1.  表情</h3><h4 id="1-正常文本间的表情">1.正常文本间的表情</h4><p>看在文字间的情况:art:看在文字间的情况</p><h4 id="2-引用块中的表情">2.引用块中的表情</h4><blockquote><p>:grin:</p><p>:fire:</p></blockquote><hr><h3 id="2-hexo渲染测试">2.hexo渲染测试</h3><h4 id="1-测试HTML">1.测试HTML</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;这是div&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure><p>这是div</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Blog </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>计组注意事项</title>
+      <link href="/2021/05/31/%E8%AE%A1%E7%BB%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
+      <url>/2021/05/31/%E8%AE%A1%E7%BB%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
+      
+        <content type="html"><![CDATA[<h3 id="基本概念">基本概念</h3><h4 id="位-bit">位(bit)</h4><p><strong>位是电子计算机中最小的数据单位</strong>。每一位的状态只有两种：0或1，在硬件上利用高电压和低电压两种信号实现；</p><h4 id="字节-Byte-B">字节(Byte, B)</h4><p><strong>字节由</strong>8个位组成，它是存储空间的基本计量单位；</p><h4 id="字">字</h4><p>字由若干个字节组成。因此，字一定为字节的整数倍。字的位数称为字长（注意：字不等于字长乘以字节！字=字长×位）。比如一个8位的CPU，这里的8位指其字长为8位，即单位时间内可以处理8位二进制数，即一个字节数。现在的CPU大部分为64位，即单位时间内可以处理64位二进制数，即8个字节数；</p><h4 id="地址线">地址线</h4><p>用于传输地址信息的数据线，一根地址线可以通过高电平或低电平来区分1或0，因此一根地址线有两个状态：1或0，那么N根地址线可以表示2的n次个不同的状态。（也表示寻址范围)</p><h3 id="寻址范围的计算">寻址范围的计算</h3><h4 id="按字节寻址">按字节寻址</h4><p>寻址范围与地址线根数有关，若有n根地址线，则寻址大小为<strong>2的n次</strong></p><blockquote><p>设有一个1MB容量的存储器，字长32位，问：按字节编址，字编址的寻址范围以及各自的寻址范围大小?</p><p>如果按字节编址，则</p><p>​                 1MB = 2^20B</p><p>​                 1字节=1B=8bit</p><p>​                 2^20B/1B = 2^20</p><p>地址范围为0~(2^20)-1,也就是说需要二十根地址线才能完成对1MB空间的编码，所以地址寄存器为20位,寻址范围大小为2^20=1M</p></blockquote><h4 id="按字寻址">按字寻址</h4><p>寻址和地址线根数，字长有关，若有n根，字长为32位（4个字节),则寻址大小为<strong>2的n次方除以4</strong></p><blockquote><p>如果按字编址，则</p><p>​                  1MB=2^20B</p><p>​                  1字=32bit=4B</p><p>​                 2^20B/4B = 2^18</p><p>地址范围为0~2^18-1，也就是说我们至少要用18根地址线才能完成对1MB空间的编码。因此按字编址的寻址范围是2^18</p></blockquote><blockquote><p>某计算机字长为32，其存储容量为16MB，若按双字编址，它的寻址范围是多少</p><p>按双字变址，故为64位<br>16MB=16<em>1024</em>1024<em>8位，所以16MB可以寻址为：<br>(16</em>1024<em>1024</em>8)/64=2<em>1024</em>1024=2M,</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> 计算机组成原理 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机组成原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java之路</title>
+      <link href="/2021/05/28/java%E4%B9%8B%E8%B7%AF/"/>
+      <url>/2021/05/28/java%E4%B9%8B%E8%B7%AF/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/img/pg/java%E5%AD%A6%E4%B9%A0.png" alt="java学习"></p><p>1.Javascript/html/css基础语法    完成(待提升)</p><ol start="2"><li>BootStrap基础使用了解          完成</li><li>计算机网络基础知识</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>广佛游记</title>
+      <link href="/2021/05/15/%E5%B9%BF%E4%BD%9B%E6%B8%B8%E8%AE%B0/"/>
+      <url>/2021/05/15/%E5%B9%BF%E4%BD%9B%E6%B8%B8%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<p>——广州——<br>广州作为中国最早开放的城市之一，有些深厚的历史文化底蕴，你可以看到它现代和复古的美丽<br>在来广州之前做足了攻略:fire:，听说沙面是拍照的好景点，第一站就来到了这－沙面</p><p><img src="/img/pg/3163559_e525fce9_1207_2187@2312x2312.jpeg.m.jpg" alt="img"></p><p>沙面</p><p>这附近有着不少的旧式风格的建筑，确实是拍照的好地方（漂亮小姐姐也挺多的!），不少人都带着专业的摄像机。</p><p><img src="/img/pg/3163559_9f240a5c_1207_2189@2312x2312.jpeg.m.jpg" alt="img"></p><p>这好像是在织布</p><p>之后来到了圣心大教堂，或许是五一游客太多，为了限制人流，现在只有教徒凭票才能进去，普通游客不能进去。</p><p><img src="/img/pg/3163559_20e37df3_1207_2191@2312x2312.jpeg.m.jpg" alt="img"></p><p>来到了广州，肯定要看的是俗称“小蛮腰”的广州塔啦。</p><p><img src="/img/pg/3163559_e2d2653f_1207_2195@2312x2312.jpeg.m.jpg" alt="img"></p><p>广州大剧院</p><p>由于我是在五一晚上，你们懂得，一眼望去全是人从众，人实在是多的受不了，所以我取消了第二天晚上登上广州塔的预约，挺遗憾的。最后还是本地的士兵们执勤帮忙疏散人群（辛苦士兵们了），很多辆公交车也被派出运送游客。</p><p><img src="/img/pg/3163559_cb4765ec_1207_2197@2312x2312.jpeg.m.jpg" alt="img"></p><p>“小蛮腰”－广州塔</p><p>——佛山——<br>佛山是武术之乡，这里有着叶问，黄飞鸿等一代武术大师。<br>祖庙是当地有名的旅游景点，这地方挺大的，花了挺多时间游玩</p><p><img src="/img/pg/3163559_39812ff5_1207_2199@2312x2312.jpeg.m.jpg" alt="img"></p><p>园林风格</p><p><img src="/img/pg/3163559_96c0880d_1207_2202@2312x2312.jpeg.m.jpg" alt="img"></p><p>在这你也可以看到园林风格的美。</p><p><img src="/img/pg/3163559_1fe6304b_1207_2208@2122x2122.jpeg.m.jpg" alt="img"></p><p>许愿池</p><p>这许愿池真的好多乌龟，（话说这石像是玄武吗），不少游客向其中投入硬币，祈求愿望。</p><p><img src="/img/pg/3163559_c2612488_1207_2212@2312x2312.jpeg.m.jpg" alt="img"></p><p>有关黄飞鸿电影画面的图片</p><p>在祖庙里有着黄飞鸿纪念馆，介绍了武术大师黄飞鸿的生平。这附近甚至也有以他命名的步行街。</p><p><img src="/img/pg/3163559_1c968e51_1221_1779@2312x2312.jpeg.m.jpg" alt="img"></p><p>一条美食街</p><p>同样一代宗师叶问的纪念馆也坐落于祖庙，在馆前你能免费拍照，得到一张6寸照。<br>来到广东，美食也是必须尝试的啦，姜撞奶，双皮奶，糖水类等都值得尝试，比较出名的店有辉记甜品店，但人有点多</p><p><img src="/img/pg/3163559_60b276c3_1221_1781@2312x2312.jpeg.m.jpg" alt="img"></p><p>一下吃多了龟苓膏会觉得有点苦</p><p><img src="/img/pg/3163559_19b70b01_1221_1783@2312x2312.jpeg.m.jpg" alt="img"></p><p>吃起来觉得有点辣</p><p>（第一次写图文，排版有点差），大概就这些啦。<a href="https://www.coolapk.com/feed/26716729?shareKey=MzU1MmQxNzQ0OTNlNjA5ZjFkNDM~&amp;shareUid=3163559&amp;shareFrom=com.coolapk.market_11.1.5.1">转自酷安</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活派 </category>
+          
+          <category> 旅行 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 生活随记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>shop system</title>
+      <link href="/2021/04/11/shop-system/"/>
+      <url>/2021/04/11/shop-system/</url>
+      
+        <content type="html"><![CDATA[<ul><li><p>​    <strong>预知</strong>：Java项目中大致分为三层：</p><p>【1】<strong>控制层</strong>（controller）的职能是负责读取视图表现层的数据，控制用户的输入，并调用业务层的方法；</p><p>【2】<strong>业务层</strong>（service）需要根据系统的实际业务需求进行逻辑代码的编写，有些业务逻辑需要通过与数据库交互的，则业务逻辑层需要调用数据访问层的相关方法实现与数据库的交互，</p><p>【3】<strong>数据访问层</strong>（dao）只负责与数据库的数据交互，将数据进行存储读取操作</p><p>【注释；表现层就是看到的东西，比如你现在看到的当前页面<br>控制层就将你的请求从页面传到后台代码<br>逻辑层就是处理你的请求的代码<br>DAO层就是将数据存到数据库中的代码】</p></li><li><p><strong>项目需求：</strong></p><p>为了便于超市业务的管理而设计的该超市管理系统。</p></li><li><p><strong>功能模块：</strong></p><p>该系统有客户信息管理，购物结算，客户回馈等基本功能</p></li><li><p><strong>项目流程图</strong>：</p><p><img src="/img/pg/shop-system.png" alt="shop-system "></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据库中的注意事项</title>
+      <link href="/2021/04/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
+      <url>/2021/04/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
+      
+        <content type="html"><![CDATA[<h4 id="数据库连接问题"><strong>数据库连接问题</strong></h4><h5 id="解决方法">解决方法</h5><p>​      在导入idea项目后，尝试连接数据库，即使账号密码正确，但连接仍一直失败，报错提示:”error no. 1045 access denied for user ‘root’@‘*****’ (using password:YES)。“ 网上查询得知mysql默认root账号只允许本机(localhost, 127.0.0.1)来连接访问. 因此可采取如下方法解决。</p><blockquote><p>运行  mysql -u root -p</p><p>​               use mysql；</p><p>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@‘%’ IDENTIFIED BY ‘123456’</p><p>​                 这里的123456为你给新增权限用户设置的密码，%代表所有主机，也可以具体到你的主机ip地址。</p><p>lush privileges;      这一步一定要做，不然无法成功！ 这句表示从mysql数据库的grant表中重新加载权限数据</p><p>​              因为MySQL把权限都放在了cache中，所以在做完更改后需要重新加载。</p></blockquote><h5 id="声明">声明</h5><p>一般在一个方法或类的声明处通过throws声明方法或类中可能抛出的异常，而在方法或类内部一般通过throw声明一个准实的异常信息。</p><hr><h4 id=""></h4><h4 id="数据库的部分依赖，完全依赖，传递依赖以及三种范式"><strong>数据库的部分依赖，完全依赖，传递依赖以及三种范式</strong></h4><h5 id="依赖关系">依赖关系</h5><ol><li><strong>部分函数依赖</strong>：设X,Y是关系R的两个属性集合，存在X→Y，若X’是X的真子集，存在X’→Y，则称Y部分函数依赖于X。</li></ol><blockquote><p>举个例子：通过AB能得出C，通过A也能得出C，通过B也能得出C，那么说C部分依赖于AB。</p></blockquote><p><strong>完全函数依赖</strong>：设X,Y是关系R的两个属性集合，X’是X的真子集，存在X→Y，但对每一个X’都有X’!→Y，则称Y完全函数依赖于X。</p><blockquote><p>举个例子：通过AB能得出C，但是AB单独得不出C，那么说C完全依赖于AB.</p></blockquote><p><strong>传递函数依赖</strong>：设X,Y,Z是关系R中互不相同的属性集合，存在X→Y(Y !→X),Y→Z，则称Z传递函数依赖于X。</p><blockquote><p>举个例子：通过A得到B，通过B得到C，但是C得不到B，B得不到A，那么成C传递依赖于A</p></blockquote><h5 id="三种范式"><strong>三种范式</strong></h5><h6 id="1-、第一范式（1NF）">1 、第一范式（1NF）</h6><p>​      在任何一个关系数据库中，第一范式（1NF）是对关系模式的基本要求，不满足第一范式（1NF）的数据库就不是关系数据库。<br>所谓第一范式（1NF）是指数据库表的每一列(即每个属性)都是不可分割的基本数据项，同一列中不能有多个值，即实体中的某个属性不能有多个值或者不能有重复的属性。<strong>简而言之，第一范式就是无重复的列。</strong></p><h6 id="2、-第二范式（2NF）">2、 第二范式（2NF）</h6><p>​    第二范式（2NF）要求实体的属性完全依赖于主关键字。所谓完全依赖是指不能存在仅依赖主关键字一部分的属性，如果存在，那么这个属性和主关键字的这一部分应该分离出来形成一个新的实体，新实体与原实体之间是一对多的关系。为实现区分通常需要为表加上一个列，以存储各个实例的唯一标识。<strong>简而言之，第二范式就是非主属性依赖于主关键字。</strong></p><h6 id="3-、第三范式（3NF）">3 、第三范式（3NF）</h6><p>​     满足第三范式（3NF）必须先满足第二范式（2NF）。在满足第二范式的基础上，切不存在传递函数依赖，那么就是第三范式。<strong>简而言之，第三范式就是属性不依赖于其它非主属性。</strong></p><p><strong>简而言之</strong><br><strong>1、第一范式（1NF）：一个关系模式R的所有属性都是不可分的基本数据项。</strong></p><p><strong>2、第二范式（2NF）：满足第一范式，然后消除部分依赖。</strong></p><p><strong>3、第三范式（3NF）： 满足第二范式，消除传递依赖。</strong></p><p><strong>4、BC范式：满足第三范式，只有码在起决定作用。</strong></p><hr><h4 id="关系模型中各种键的定义和区别"><strong>关系模型中各种键的定义和区别</strong></h4><p><strong>超键(super key):在关系中能唯一标识元组的属性集称为关系模式的超键</strong></p><p><strong>候选键(candidate key):不含有多余属性的超键称为候选键</strong></p><p><strong>主键(primary key):用户选作元组标识的一个候选键程序主键</strong></p><p>比如一个小范围的所有人，没有重名的，考虑以下属性</p><p>身份证 姓名 性别 年龄</p><ol><li>超键的组合是唯一的，但可能不是最小唯一的</li></ol><blockquote><p>身份证唯一，所以是一个超键</p><p>姓名唯一，所以是一个超键</p><p>（姓名，性别）唯一，所以是一个超键</p><p>（姓名，性别，年龄）唯一，所以是一个超键</p></blockquote><p>2.主键是选中的一个候选键</p><blockquote><p>身份证唯一，而且没有多余属性，所以是一个候选键</p><p>姓名唯一，而且没有多余属性，所以是一个候选键</p></blockquote><ol start="3"><li>主键是选中的一个候选键</li></ol><blockquote><p>考虑输入查询方便性，可以选择 身份证 为主键</p><p>也可以 考虑习惯 选择 姓名 为主键</p></blockquote><p><strong>主属性：候选码的中的一个属性。</strong></p><blockquote><p>选课（学号，课程号），此关系的候选码只有一个，为：【学号、课程号】，故主属性有：学号、课程号</p></blockquote><hr><h4 id="求出关系模式的候选键">求出关系模式的候选键</h4><p>[算法]：按以下步骤求候选键：<br>1.只在FD右部出现的属性，不属于候选码;<br>2.只在FD左部出现的属性，一定存在于某候选码当中;<br>3.外部属性一定存在于任何候选码当中;<br>4.其他属性逐个与2,3的属性组合，求属性闭包，直至X的闭包等于U,若等于U,则X为候选码。</p><blockquote><p>R&lt;U,F&gt;,U=(A,B,C,D,E,G),F={AB–&gt;C,CD–&gt;E,E–&gt;A.A–&gt;G},求候选码。</p><p>因G只在右边出现,所以G一定不属于候选码;而B,D只在左边出现,所以B,D一定属于候选码;BD的闭包还是BD,则对BD进行组合,除了G以外,BD可以跟A,C,E进行组合<br>先看ABD<br>ABD本身自包ABD,而AB–&gt;C,CD–&gt;E,A–&gt;G,所以ABD的闭包为ABDCEG=U<br>再看BDC<br>CD–&gt;E,E–&gt;A,A–&gt;G,BDC本身自包,所以BDC的闭包为BDCEAG=U<br>最后看BDE<br>E–&gt;A,A–&gt;G,AB–&gt;C,BDE本身自包,所以BDE的闭包为BDEAGC=U</p><p>因为(ABD)、(BCD)、(BDE)的闭包都是ABCDEG所以本问题的候选码有3个分别是ABC、BCD和BDE</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习派 </category>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>travel</title>
+      <link href="/2021/04/06/travel/"/>
+      <url>/2021/04/06/travel/</url>
+      
+        <content type="html"><![CDATA[<p>久违的踏青，天上也下着小雨，路上没有多少行人，自然中的清新感也扫去了心中的烦闷感<img src="../../../../img/pg/e.jpg" alt="e"></p><p><img src="../../../../img/pg/c.jpg" alt="c"></p><p><img src="../../../../img/pg/d.jpg" alt="d"></p><p><img src="../../../../img/pg/b.jpg" alt="b"></p><p><img src="../../../../img/pg/a.jpg" alt="a"></p><p><img src="../../../../img/pg/f.jpg" alt="f"></p><p><img src="/img/pg/g.jpg" alt="g"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活派 </category>
+          
+          <category> 旅行 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 生活随记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>背影</title>
+      <link href="/2021/03/28/%E8%83%8C%E5%BD%B1/"/>
+      <url>/2021/03/28/%E8%83%8C%E5%BD%B1/</url>
+      
+        <content type="html"><![CDATA[<p>我与父亲不相见已二年余了，我最不能忘记的是他的背影。那年冬天，祖母死了，父亲的差使也交卸了，正是祸不单行的日子。我从北京到徐州，打算跟着父亲奔丧回家。到徐州见着父亲,看见满院狼藉的东西，又想起祖母，不禁簌簌地流下眼泪。父亲说，“事已如此，不必难过，好在天无绝人之路!”回家变卖典质，父亲还了亏空;又借钱办了丧事。这些日子，家中光景很是惨淡，一半为了丧事，一半为了父亲赋闲。丧事完毕，父亲要到南京谋事，我也要回北京念书，我们便同行。</p><p>到南京时，有朋友约去游逛，勾留了一日;第二日上午便须渡江到浦口，下午上车北去。父亲因为事忙，本已说定不送我，叫旅馆里一个熟识的茶房陪我同去。他再三嘱咐茶房，甚是仔细。但他终于不放心，怕茶房不妥帖;然后他颠颇踌躇了一会。其实我那年已二十岁，北京已来往过两三次，是没有什么要紧的了。他踌躇了一会，终于决定还是自己送我去。我再三回劝他不必去;他只说，“不要紧，他们去不好!”</p><p>我们过了江，进了车站。我买票，他忙着照看行李。行李太多了，得向脚夫行些小费才可过去。他便又忙着和他们讲价钱。我那时真是聪明过分，总觉他说话不大漂亮，非自己插嘴不可，但他终于讲定了价钱;就送我上车。<img src="/img/pg/1.jpg" alt="1">他给我拣定了靠车门的一张椅子;我将他给我做的紫毛大衣铺好座位。他嘱我路上小心，夜里要警醒些，不要受凉。又嘱托茶房好好照应我。我心里暗笑他的迂;他们只认得钱，托他们只是白托!而且我这样大年纪的人，难道还不能料理自己么?唉，我现在想想，那时真是太聪明了!</p><p>我说道，“爸爸，你走吧。”他往车外看了看说，“我买几个橘子去。你就在此地，不要走动。”我看那边月台的栅栏外有几个卖东西的等着顾客。走到那边月台，须穿过铁道，须跳下去又爬上去父亲是一个胖子，走过去自然要费事些。我本来要去的，他不肯，只好让他去。我看见他戴着黑布小帽，穿着黑布大马褂，深青布棉袍，蹒跚地走到铁道边，慢慢探身下去，尚不大难。可是他穿过铁道，要爬上那边月台，就不容易了。他用两手攀着上面，两脚再向上缩;他肥胖的身子向左微倾，显出努力的样子。这时我看见他的背影，我的泪很快地流下来了。我赶紧拭干了泪。怕他看见，也怕别人看见。我再向外看时，他已抱了朱红的橘子往回走了。过铁道时，他先将橘子散放在地上，自己慢慢爬下，再抱起橘子走。到这边时，我赶紧去搀他。他和我走到车上，将橘子一股脑儿放在我的皮大衣上。<img src="/img/pg/2.jpg" alt="2">于是扑扑衣上的泥土，心里很轻松似的。过一会儿说，“我走了，到那边来信!”我望着他走出去。他走了几步，回过头看见我，说，“进去吧，里边没人。”等他的背影混入来来往往的人里，再找不着了，我便进来坐下，我的眼泪又来了。</p><p>近几年来，父亲和我都是东奔西走，家中光景是一日不如一日。他少年出外谋生，独力支持，做了许多大事。哪知老境却如此颓唐!他触目伤怀，自然情不能自已。情郁于中，自然要发之于外;家庭琐屑便往往触他之怒。他待我渐渐不同往日。但最近两年不见，他终于忘却我的不好，只是惦记着我，惦记着我的儿子。我北来后，他写了一信给我，信中说道：“我身体平安，唯膀子疼痛厉害，举箸提笔，诸多不便，大约大去之期不远矣。”我读到此处，在晶莹的泪光中，又看见那肥胖的、青布棉袍黑布马褂的背影。唉!我不知何时再能与他相见</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 文学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
