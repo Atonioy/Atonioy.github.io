@@ -1,0 +1,326 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>基于对比预测的缺失视图聚类方法 | 哒哒哒！</title><meta name="author" content="流星の涙"><meta name="copyright" content="流星の涙"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="介绍 多视图&#x2F;多模态表示学习旨在从多视图&#x2F;模态数据中学习有效的表示，以改进聚类、分类、检索等下游任务的性能。现有多视图表示学习方法的成功都显式或隐式地要求数据满足视图“完备性”和“一致性”假设。其中“完备性”假设要求每一实例在所有的视图中均需存在，即要求数据是“完整的”；“一致性”假设则要求每一实例在所有的视图中均存在正确的对应关系，即要求数据是跨视图“对齐的”。当数据不满足任一假设时，大多数多视">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于对比预测的缺失视图聚类方法">
+<meta property="og:url" content="http://example.com/2024/03/26/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BC%BA%E5%A4%B1%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="哒哒哒！">
+<meta property="og:description" content="介绍 多视图&#x2F;多模态表示学习旨在从多视图&#x2F;模态数据中学习有效的表示，以改进聚类、分类、检索等下游任务的性能。现有多视图表示学习方法的成功都显式或隐式地要求数据满足视图“完备性”和“一致性”假设。其中“完备性”假设要求每一实例在所有的视图中均需存在，即要求数据是“完整的”；“一致性”假设则要求每一实例在所有的视图中均存在正确的对应关系，即要求数据是跨视图“对齐的”。当数据不满足任一假设时，大多数多视">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/tg/A.jpg">
+<meta property="article:published_time" content="2024-03-26T06:42:57.000Z">
+<meta property="article:modified_time" content="2024-04-04T13:24:12.047Z">
+<meta property="article:author" content="流星の涙">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/tg/A.jpg"><link rel="shortcut icon" href="/img/tg/favicon.png"><link rel="canonical" href="http://example.com/2024/03/26/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BC%BA%E5%A4%B1%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '基于对比预测的缺失视图聚类方法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-04-04 21:24:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/tg/z.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> bangumis</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/tg/A.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">哒哒哒！</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> bangumis</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">基于对比预测的缺失视图聚类方法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-26T06:42:57.000Z" title="发表于 2024-03-26 14:42:57">2024-03-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-04T13:24:12.047Z" title="更新于 2024-04-04 21:24:12">2024-04-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="基于对比预测的缺失视图聚类方法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="介绍">介绍</h2>
+<p>多视图/多模态表示学习旨在从多视图/模态数据中学习有效的表示，以改进聚类、分类、检索等下游任务的性能。现有多视图表示学习方法的成功都显式或隐式地要求数据满足视图“完备性”和“一致性”假设。其中“完备性”假设要求每一实例在所有的视图中均需存在，即要求数据是“完整的”；“一致性”假设则要求每一实例在所有的视图中均存在正确的对应关系，即要求数据是跨视图“对齐的”。当数据不满足任一假设时，大多数多视图学习方法，特别在无监督条件下，都难以学习到有效的表示。</p>
+<p><strong>信息量度量的是一个具体事件发生了所带来的信息，而熵则是在结果出来之前对可能产生的信息量的期望——考虑该随机变量的所有可能取值，即所有可能发生事件所带来的信息量的期望</strong></p>
+<blockquote>
+<p>互信息是信息论中用以评价两个随机变量之间的依赖程度的一个度量。</p>
+<p>举个例子：x=今天下雨与y=今天阴天，显然在已知y的情况下, 发生x的概率会更大</p>
+<p>熵H ( X )表示X 的不确定度（不确定度越大，信息量越大）</p>
+<p>联合熵H ( X , Y ) 表示X 和Y一起发生时，产生的信息量。</p>
+<p>条件熵H ( X ∣ Y ) 表示在Y发生的前提下，X 发生新带来的信息量。</p>
+<p>最小化条件熵可以增加数据的可恢复性，因为条件熵反映了在给定一个变量的情况下，另外一个变量的不确定性，如果条件熵越小说明给定变量对另外一个变量的影响越大，也就是另一个变量的信息可以容易从给定变量的信息恢复出来。</p>
+</blockquote>
+<p>其次，我们的方法是专门为处理缺失数据而设计的，而现有的对比学习工作忽略了这一实际问题。第三，虽然现有的对比学习研究表明可以通过最大化不同增强的互信息来学习一致性，但它们忽略了不一致性学习。在统一的信息论框架下，我们证明了不一致性学习可以用条件熵来定义，并且通过最小化不一致性可以恢复缺失数据。</p>
+<h2 id="方法">方法</h2>
+<p>在本节中，我们提出了一种深度多视图聚类方法，命名为COMPlete muLti-view clustEring through con TrastivE pReuation (完成符)，用于学习一组不完整多视图样本的表示。如图所示，完成符由三个联合学习目标组成，即视图内重构、跨视图对比学习和跨视图双预测。为了清晰起见，我们将首先介绍所提出的损失函数，然后详细说明每个目标。</p>
+<img src="https://s2.loli.net/2024/03/08/E15ek89UoXF7Sv3.png" alt="image-20240308170254588" style="zoom:80%;" />
+<h3 id="目标函数">目标函数</h3>
+<p>以双视图数据集为例，提出下列目标函数。</p>
+<img src="https://s2.loli.net/2024/03/08/sSLbPiWwKJhBdmj.png" alt="image-20240308171447278" style="zoom:80%;" />
+<p>其中Lcl、Lpre和Lrec分别为跨视角对比损失、双预测损失和视角内重构损失。参数λ 1和λ 2分别为Lpre和Lrec上的平衡因子。</p>
+<h3 id="视图内重构">视图内重构</h3>
+<p>对于每个视图，我们使用一个自编码器，最小化下列函数来学习潜在表示</p>
+<img src="https://s2.loli.net/2024/03/09/JBlCiP7n19V2EoG.png" alt="image-20240309150348774" style="zoom: 67%;" />
+<p>f是编码器，g是解码器，其中潜在表示Z=fX</p>
+<h3 id="跨视图对比">跨视图对比</h3>
+<p>在Lrec参数化的潜在空间中，我们进行对比学习来学习不同视图之间共享的共同表示。本文通过最大化互信息的下界学习表示Z1和Z2，直接最大化不同视图表示之间的互信息。在数学上表示如下：</p>
+<img src="https://s2.loli.net/2024/03/09/5N4KZABbGmjSlVU.png" alt="image-20240309151401913" style="zoom:67%;" />
+<p>I表示互信息，H表示信息熵，一方面，从信息论的角度来看，信息熵是一个事件所传递的平均信息量[ 3 ]。因此，一个较大的熵H ( Zi )表示一个信息量更大的表示Zi。另一方面，H ( Z1 )和H ( Z2 )的最大化将避免将所有样本分配到同一簇的平凡解</p>
+<p>为了构造I( Zt1、Zt2)，我们首先定义了变量z和z′的联合概率分布P( z , z′)。</p>
+<img src="https://s2.loli.net/2024/03/09/RyBkitfU7aqVLsz.png" alt="image-20240309152748863" style="zoom:67%;" />
+<p>令Pd和P′d表示边缘概率分布P( z = d)和P( z′= d′)，它们可以通过对联合概率分布矩阵P的第d行和第d′列求和得到，Pdd′为P的第d行第d′列元素</p>
+<h3 id="实例级对比预测">实例级对比预测</h3>
+<p>在一个由神经网络参数化的潜在空间中，通过最小化熵H 条件( Zi | Zj )来预测另一个视图的特定表示。</p>
+<p>对于给定的双视图数据集，我们进一步有</p>
+<img src="https://s2.loli.net/2024/03/09/yw1A5WVI2d9cBZg.png" alt="image-20240309153817275" style="zoom:67%;" />
+<p>G ( j ) ( · )可以是一个参数化模型，它将Zj映射到Zi。模型收敛后，通过上述对偶映射很容易从~ Zj中预测缺失表示~ Zi，即<img src="https://s2.loli.net/2024/03/09/76nfpHhKIuxocyr.png" alt="image-20240309154051358" style="zoom:67%;" />，Zj表示~ Xj的表示。</p>
+<h3 id="两个以上视图的对比预测">两个以上视图的对比预测</h3>
+<p>通过对偶对比预测来解决这个问题有两种通用的方法，即基于核心视图的方法( DCP-CV )和基于完全图的方法( DCP-CG )。</p>
+<p><img src="https://s2.loli.net/2024/03/26/m2keBxfC6zvdXUQ.png" alt="image-20240326154729929"></p>
+<blockquote>
+<p>对两个以上视图进行对比预测。实心圆和点状圆分别表示可用视图和缺失视图。线条表示用Licl和Lpre进行训练，箭头表示丢失视图的恢复。</p>
+</blockquote>
+<ul>
+<li><strong>DCP-CV</strong>：一个具有V个视图的多视图数据集，我们选定一个核心视图X1，然后X1与其他视图Xj进行对比预测。</li>
+</ul>
+<p><img src="https://s2.loli.net/2024/03/26/JkIDq81U3eM75tu.png" alt="image-20240326152729272"></p>
+<p>其中<img src="https://s2.loli.net/2024/03/26/KNX7L8EcjD61t95.png" alt="image-20240326152831396">，而Lccl是类别级别对比预测，是利用数据标签来增强数据的可分性。对于无监督学习，这一项可以去除。</p>
+<ul>
+<li><strong>DCP - CG</strong>：对所有可能的视图对进行实例级的对比学习和对偶预测，如图所示。在形式上，</li>
+</ul>
+<p><img src="https://s2.loli.net/2024/03/26/ZisnPFN8EUrTRze.png" alt="image-20240326154508121"></p>
+<p>虽然DCP - CV和DCP - CG都能够学习到充分和最小的表示，但我们推荐后者，原因如下。一方面为了一致性学习，DCP - CG将捕获更多的信息，因为在学习阶段包含并利用了所有的视图对。</p>
+<p>具体来说，DCP - CG试图最大化视图间的互信息V(V-1)/2次，而DCP - CV只最大化V-1次，另一方面，DCP - CG在执行数据恢复时比DCP-CV表现出更强的鲁棒性。</p>
+<p>下面给出DCP - CG鲁棒性更强的理论解释。</p>
+<ol>
+<li>如图3 ( b )中列所示，DCP - CG可以很容易地通过平均其他可用视图的预测来恢复丢失的视图。</li>
+<li>如图3 ( a )右列所示，DCP-CV可能会遇到误差累积问题。具体来说，当X1和X3都缺失时，首先需要恢复核心视图X1，然后恢复X3。</li>
+<li>DCP - CV需要选择一个重要的视图作为核心视图，在先验知识不可得的情况下，这个核心视图是困难的。在我们的实现中，为了简单起见，我们随机选择一个视图作为核心视图。</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">流星の涙</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/03/26/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BC%BA%E5%A4%B1%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95/">http://example.com/2024/03/26/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BC%BA%E5%A4%B1%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">哒哒哒！</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/tg/A.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/04/%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%9A%84%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/"><img class="prev-cover" src="/img/tg/A.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">基于图的多视图聚类</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/04/%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E4%B8%8B%E7%9A%84%E9%B2%81%E6%A3%92%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/"><img class="next-cover" src="/img/tg/A.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">不完全信息下的鲁棒多视图聚类</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/tg/z.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">流星の涙</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Atonioy"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">干巴嘚</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">目标函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E5%86%85%E9%87%8D%E6%9E%84"><span class="toc-number">2.2.</span> <span class="toc-text">视图内重构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%A8%E8%A7%86%E5%9B%BE%E5%AF%B9%E6%AF%94"><span class="toc-number">2.3.</span> <span class="toc-text">跨视图对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E7%BA%A7%E5%AF%B9%E6%AF%94%E9%A2%84%E6%B5%8B"><span class="toc-number">2.4.</span> <span class="toc-text">实例级对比预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E4%BB%A5%E4%B8%8A%E8%A7%86%E5%9B%BE%E7%9A%84%E5%AF%B9%E6%AF%94%E9%A2%84%E6%B5%8B"><span class="toc-number">2.5.</span> <span class="toc-text">两个以上视图的对比预测</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E7%A0%94%E7%A9%B6/" title="多视图聚类的研究"><img src="/img/tg/A.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="多视图聚类的研究"/></a><div class="content"><a class="title" href="/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E7%A0%94%E7%A9%B6/" title="多视图聚类的研究">多视图聚类的研究</a><time datetime="2024-04-04T13:15:39.591Z" title="发表于 2024-04-04 21:15:39">2024-04-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E7%9A%84%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%BC%96%E7%A0%81/" title="多视图的对比学习编码"><img src="/img/tg/A.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="多视图的对比学习编码"/></a><div class="content"><a class="title" href="/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E7%9A%84%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%BC%96%E7%A0%81/" title="多视图的对比学习编码">多视图的对比学习编码</a><time datetime="2024-04-04T13:11:31.000Z" title="发表于 2024-04-04 21:11:31">2024-04-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/04/%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%9A%84%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/" title="基于图的多视图聚类"><img src="/img/tg/A.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于图的多视图聚类"/></a><div class="content"><a class="title" href="/2024/04/04/%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%9A%84%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/" title="基于图的多视图聚类">基于图的多视图聚类</a><time datetime="2024-04-04T13:06:20.000Z" title="发表于 2024-04-04 21:06:20">2024-04-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/26/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BC%BA%E5%A4%B1%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95/" title="基于对比预测的缺失视图聚类方法"><img src="/img/tg/A.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于对比预测的缺失视图聚类方法"/></a><div class="content"><a class="title" href="/2024/03/26/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BC%BA%E5%A4%B1%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95/" title="基于对比预测的缺失视图聚类方法">基于对比预测的缺失视图聚类方法</a><time datetime="2024-03-26T06:42:57.000Z" title="发表于 2024-03-26 14:42:57">2024-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/04/%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E4%B8%8B%E7%9A%84%E9%B2%81%E6%A3%92%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/" title="不完全信息下的鲁棒多视图聚类"><img src="/img/tg/A.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="不完全信息下的鲁棒多视图聚类"/></a><div class="content"><a class="title" href="/2024/03/04/%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E4%B8%8B%E7%9A%84%E9%B2%81%E6%A3%92%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/" title="不完全信息下的鲁棒多视图聚类">不完全信息下的鲁棒多视图聚类</a><time datetime="2024-03-04T06:42:57.000Z" title="发表于 2024-03-04 14:42:57">2024-03-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 流星の涙</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = new Waline(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comments-rouge.vercel.app',
+      avatar: 'monsterid',
+      avatarCDN: 'https://sdn.geekzu.org/avatar/',
+      path: location.pathname,
+      visitor: true,
+      dark: 'html[data-theme="dark"]'
+    }, null))
+  }
+
+  if (typeof Waline === 'function') initWaline() 
+  else getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js').then(initWaline)
+}
+
+if ('Waline' === 'Waline' || !false) {
+  if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><div class="aplayer no-destroy" data-id="8044943229" data-server="tencent" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
