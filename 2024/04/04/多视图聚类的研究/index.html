@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>哒哒哒！ | 哒哒哒！</title><meta name="author" content="流星の涙"><meta name="copyright" content="流星の涙"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="title: 多视图聚类的研究 date: 2023-11-21 14:42:57 top_img: &#x2F;img&#x2F;wg&#x2F;mx.jpg cover: &#x2F;img&#x2F;wg&#x2F;mx.jpg tags:  多视图聚类 深度学习 categories: 学习派 多视图聚类  多视图聚类的研究 摘要 在大数据时代，数据产生于不同的来源或从不同的视角观察。这些数据统称为多视图数据。多视图聚类( Multi-view C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哒哒哒！">
+<meta property="og:url" content="http://example.com/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E7%A0%94%E7%A9%B6/index.html">
+<meta property="og:site_name" content="哒哒哒！">
+<meta property="og:description" content="title: 多视图聚类的研究 date: 2023-11-21 14:42:57 top_img: &#x2F;img&#x2F;wg&#x2F;mx.jpg cover: &#x2F;img&#x2F;wg&#x2F;mx.jpg tags:  多视图聚类 深度学习 categories: 学习派 多视图聚类  多视图聚类的研究 摘要 在大数据时代，数据产生于不同的来源或从不同的视角观察。这些数据统称为多视图数据。多视图聚类( Multi-view C">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/tg/A.jpg">
+<meta property="article:published_time" content="2024-04-04T12:45:43.227Z">
+<meta property="article:modified_time" content="2024-04-04T12:46:38.784Z">
+<meta property="article:author" content="流星の涙">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/tg/A.jpg"><link rel="shortcut icon" href="/img/tg/favicon.png"><link rel="canonical" href="http://example.com/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E7%A0%94%E7%A9%B6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '哒哒哒！',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-04-04 20:46:38'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/tg/z.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> bangumis</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/tg/A.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">哒哒哒！</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> bangumis</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-04T12:45:43.227Z" title="发表于 2024-04-04 20:45:43">2024-04-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-04T12:46:38.784Z" title="更新于 2024-04-04 20:46:38">2024-04-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>title: 多视图聚类的研究<br>
+date: 2023-11-21 14:42:57<br>
+top_img: /img/wg/mx.jpg<br>
+cover: /img/wg/mx.jpg<br>
+tags:</p>
+<ul>
+<li>多视图聚类</li>
+<li>深度学习<br>
+categories:</li>
+<li>学习派</li>
+<li>多视图聚类</li>
+</ul>
+<h1>多视图聚类的研究</h1>
+<h2 id="摘要">摘要</h2>
+<p>在大数据时代，数据产生于不同的来源或从不同的视角观察。这些数据统称为多视图数据。多视图聚类( Multi-view Clustering，MvC )旨在利用多个视图之间的互补和共识信息。本文根据涉及的机制和原理主要把算法分为以下五类：协同训练风格算法、多核学习、多视图图聚类、多视图子空间聚类和多任务多视图聚类。</p>
+<h2 id="介绍">介绍</h2>
+<h2 id="MvC的原则">MvC的原则</h2>
+<h2 id="多视图聚类算法">多视图聚类算法</h2>
+<h3 id="协同训练算法">协同训练算法</h3>
+<p>算法思想：这类方法旨在最大限度地在所有观点之间达成共识，并达成最广泛的共识。</p>
+<p><img src="C:%5CUsers%5CAce%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20231120204403660.png" alt="image-20231120204403660"></p>
+<p>算法交替训练，通过利用先验信息或相互学习知识来最大化两个不同视图的一致性。需要注意的是，协同训练的成功主要依赖于3个假设：( 1 )充分性：每个视图都足以独立完成学习任务；( 2 )兼容性：目标函数在两个视图中以高概率输出对共现特征的相同预测；( 3 )条件独立性：所有视图都在条件独立性中提供学习标签。实际训练中<strong>难以满足条件独立性</strong>（因为协同训练的核心就是利用共享数据相互学习）。</p>
+<p>实例：<img src="C:%5CUsers%5CAce%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20231120210614154.png" alt="image-20231120210614154"></p>
+<p>为了约束另一个视图的相似图，从一个视图进行谱嵌入。通过迭代地执行这个过程，两个视图的聚类趋于彼此。</p>
+<blockquote>
+<p>谱嵌入：谱嵌入是一种将数据点映射到低维空间的技术，通过这种映射可以保留数据点之间的相似性和结构信息，谱也指拉普拉斯矩阵的特征向量。在本算法中是用另外一个视图的判别特征向量对这个视图的相似矩阵进行点积得到新的相似矩阵</p>
+<p>判别特征向量：对拉普拉斯矩阵进行特征分解，得到特征值和特征向量。选取前几个特征值对应的特征向量作为判别特征向量</p>
+</blockquote>
+<h3 id="多核学习">多核学习</h3>
+<p>算法思想：不同的预定义核用于处理不同的视图。然后将这些核进行线性或非线性组合，从而得到一个统一的核。MvC环境下，基于多核学习的MvC旨在对一组预定义的核进行最优组合，以提高聚类性能。</p>
+<p><img src="C:%5CUsers%5CAce%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20231121142553382.png" alt="image-20231121142553382"></p>
+<p>一个基本的问题是找到一种方法来选择合适的核函数并将这些核函数进行最优组合。</p>
+<p>实例：<img src="C:%5CUsers%5CAce%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20231121142846795.png" alt="image-20231121142846795"></p>
+<ol>
+<li>
+<p>在每个视图上使用核主成分分析对原始数据进行降维，得到低维的多视图数据。</p>
+</li>
+<li>
+<p>将设计的加权高斯核应用在低维多视图数据上。该步骤驱动每个视图和聚类中心的权重</p>
+</li>
+<li>
+<p>经过有限次迭代后，得出最终的聚类结果。</p>
+<blockquote>
+<p>核主成分分析( KPCA)可实现数据的非线性降维，用于处理线性不可分的数据集。大致思路是：对于输入空间中的矩阵  ，我们先用一个非线性映射把 中的所有样本映射到一个高维甚至是无穷维的空间(称为特征空间)，(使其线性可分)，然后在这个高维空间进行PCA降维。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="多视图图聚类">多视图图聚类</h3>
+<p>算法思想：多视图图聚类旨在找到一个横跨所有视图的融合图，然后在此基础上使用图割算法或其他技术(例如,谱聚类)。</p>
+<p><img src="C:%5CUsers%5CAce%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20231121154426996.png" alt="image-20231121154426996"></p>
+<p>在这个类别中，文献综述分为三个部分，即基于图的MvC，基于网络的MvC和基于谱的MvC。</p>
+<h4 id="基于图的MvC">基于图的MvC</h4>
+<h2 id="总结和探讨">总结和探讨</h2>
+<h3 id="五种算法的优缺点">五种算法的优缺点</h3>
+<ul>
+<li>协同算法算法：可以通过交流信息来交互增强不同视图的聚类。然而，当视图数量超过三个时，它们是难以解决的。</li>
+<li>多核学习：继承了核的优点，但也带来了较高的计算复杂度。</li>
+<li>多视图图聚类：引入谱图理论，同时依赖于构造的亲和度(或相似度)矩阵。</li>
+<li>多视图子空间聚类：具有直接的可解释性，同时也具有初始化依赖性。</li>
+<li>多任务多视图：继承了多任务聚类和多视图聚类的特性</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">流星の涙</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E7%A0%94%E7%A9%B6/">http://example.com/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E7%A0%94%E7%A9%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">哒哒哒！</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/tg/A.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/04/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BC%BA%E5%A4%B1%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95/"><img class="prev-cover" src="/img/tg/A.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E7%9A%84%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%BC%96%E7%A0%81/"><img class="next-cover" src="/img/tg/A.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/tg/z.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">流星の涙</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Atonioy"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">干巴嘚</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">多视图聚类的研究</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.1.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MvC%E7%9A%84%E5%8E%9F%E5%88%99"><span class="toc-number">1.3.</span> <span class="toc-text">MvC的原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">多视图聚类算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E5%90%8C%E8%AE%AD%E7%BB%83%E7%AE%97%E6%B3%95"><span class="toc-number">1.4.1.</span> <span class="toc-text">协同训练算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%A0%B8%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.4.2.</span> <span class="toc-text">多核学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%A7%86%E5%9B%BE%E5%9B%BE%E8%81%9A%E7%B1%BB"><span class="toc-number">1.4.3.</span> <span class="toc-text">多视图图聚类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%9A%84MvC"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">基于图的MvC</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E5%92%8C%E6%8E%A2%E8%AE%A8"><span class="toc-number">1.5.</span> <span class="toc-text">总结和探讨</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E7%A7%8D%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">1.5.1.</span> <span class="toc-text">五种算法的优缺点</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/04/04/%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%9A%84%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/" title="无题"><img src="/img/tg/A.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2024/04/04/%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%9A%84%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/" title="无题">无题</a><time datetime="2024-04-04T12:48:30.767Z" title="发表于 2024-04-04 20:48:30">2024-04-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/04/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BC%BA%E5%A4%B1%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95/" title="无题"><img src="/img/tg/A.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2024/04/04/%E5%9F%BA%E4%BA%8E%E5%AF%B9%E6%AF%94%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BC%BA%E5%A4%B1%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95/" title="无题">无题</a><time datetime="2024-04-04T12:46:46.666Z" title="发表于 2024-04-04 20:46:46">2024-04-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E7%A0%94%E7%A9%B6/" title="无题"><img src="/img/tg/A.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E7%A0%94%E7%A9%B6/" title="无题">无题</a><time datetime="2024-04-04T12:45:43.227Z" title="发表于 2024-04-04 20:45:43">2024-04-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E7%9A%84%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%BC%96%E7%A0%81/" title="无题"><img src="/img/tg/A.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E7%9A%84%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E7%BC%96%E7%A0%81/" title="无题">无题</a><time datetime="2024-04-04T12:44:26.849Z" title="发表于 2024-04-04 20:44:26">2024-04-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/04/%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E4%B8%8B%E7%9A%84%E9%B2%81%E6%A3%92%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/" title="无题"><img src="/img/tg/A.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2024/03/04/%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E4%B8%8B%E7%9A%84%E9%B2%81%E6%A3%92%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/" title="无题">无题</a><time datetime="2024-03-04T06:42:57.476Z" title="发表于 2024-03-04 14:42:57">2024-03-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 流星の涙</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = new Waline(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comments-rouge.vercel.app',
+      avatar: 'monsterid',
+      avatarCDN: 'https://sdn.geekzu.org/avatar/',
+      path: location.pathname,
+      visitor: true,
+      dark: 'html[data-theme="dark"]'
+    }, null))
+  }
+
+  if (typeof Waline === 'function') initWaline() 
+  else getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js').then(initWaline)
+}
+
+if ('Waline' === 'Waline' || !false) {
+  if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><div class="aplayer no-destroy" data-id="8044943229" data-server="tencent" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
