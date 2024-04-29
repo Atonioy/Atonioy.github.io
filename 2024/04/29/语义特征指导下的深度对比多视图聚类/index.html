@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>语义特征指导下的深度对比多视图聚类 | 哒哒哒！</title><meta name="keywords" content="深度学习,多视图聚类"><meta name="author" content="流星の涙"><meta name="copyright" content="流星の涙"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="摘要：最近，对比学习在多视图聚类领域取得了很好的效果。然而，忽略语义一致性的正负样本构造机制导致了假阴性对的产生，限制了现有算法性能的进一步提升。针对这一问题，本文提出了语义特征指导下的深度对比多视图聚类框架( Deep Contrastive Multi-view Clustering under Semantic feature guidance，DCMCS )来缓解假阴性对的影响。具体来说，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="语义特征指导下的深度对比多视图聚类">
+<meta property="og:url" content="http://example.com/2024/04/29/%E8%AF%AD%E4%B9%89%E7%89%B9%E5%BE%81%E6%8C%87%E5%AF%BC%E4%B8%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/index.html">
+<meta property="og:site_name" content="哒哒哒！">
+<meta property="og:description" content="摘要：最近，对比学习在多视图聚类领域取得了很好的效果。然而，忽略语义一致性的正负样本构造机制导致了假阴性对的产生，限制了现有算法性能的进一步提升。针对这一问题，本文提出了语义特征指导下的深度对比多视图聚类框架( Deep Contrastive Multi-view Clustering under Semantic feature guidance，DCMCS )来缓解假阴性对的影响。具体来说，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/wg/mx.jpg">
+<meta property="article:published_time" content="2024-04-29T12:40:55.000Z">
+<meta property="article:modified_time" content="2024-04-29T12:54:19.031Z">
+<meta property="article:author" content="流星の涙">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="多视图聚类">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/wg/mx.jpg"><link rel="shortcut icon" href="/img/tg/favicon.png"><link rel="canonical" href="http://example.com/2024/04/29/%E8%AF%AD%E4%B9%89%E7%89%B9%E5%BE%81%E6%8C%87%E5%AF%BC%E4%B8%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '语义特征指导下的深度对比多视图聚类',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-04-29 20:54:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/tg/z.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> bangumis</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/wg/mx.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">哒哒哒！</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> bangumis</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">语义特征指导下的深度对比多视图聚类</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-29T12:40:55.000Z" title="发表于 2024-04-29 20:40:55">2024-04-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-29T12:54:19.031Z" title="更新于 2024-04-29 20:54:19">2024-04-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E6%B4%BE/">学习派</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="语义特征指导下的深度对比多视图聚类"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>摘要</strong>：最近，对比学习在多视图聚类领域取得了很好的效果。然而，忽略语义一致性的正负样本构造机制导致了假阴性对的产生，限制了现有算法性能的进一步提升。针对这一问题，本文提出了语义特征指导下的深度对比多视图聚类框架( Deep Contrastive Multi-view Clustering under Semantic feature guidance，DCMCS )来缓解假阴性对的影响。具体来说，首先从原始特征中提取特定视角的特征，并根据视角重要性进行融合，得到融合视角特征。为了减轻视图隐私信息的干扰，通过簇级对比学习特定视图和融合视图的语义特征，并将其级联以度量实例的语义相似度。通过最小化由语义相似度加权的实例级对比损失，DCMCS自适应地削弱了假阴性对之间的对比学习。在几个公共数据集上的实验结果表明，所提出的框架优于最先进的方法。</p>
+<p><strong>关键词：多视图聚类, 对比学习, 假阴性对, 语义特征</strong></p>
+<h2 id="动机"><strong>动机</strong></h2>
+<p>多视图聚类( multi-view clustering，MVC )在最近几年引起了人们的兴趣，并在生物学、医学、社交网络、农业等领域得到了广泛的应用。传统的MVC方法包括非负矩阵分解、隐表示学习、图学习和张量学习。许多传统的MVC方法存在表示效果差和计算复杂度高的问题，导致其在具有真实数据的复杂场景中性能有限。深度学习以其强大的表征能力开发出优越的特征，因此深度MVC逐渐流行起来。深度MVC方法可以分为4个子类：子空间聚类、基于图的深度聚类、深度表示聚类和谱聚类。与其他方法相比，深度表示聚类通常采用简单的编码器-解码器结构，并且可能更加灵活。</p>
+<p>有效的深度MVC依赖于从多视图数据中学习判别性的公共信息。最近，对比学习被融入到深度MVC中，因为它能够捕获高层语义而丢弃无关信息。有研究者设计融合网络提取公共信息。有研究者在不同的特征层执行不同的目标，以解决一致性和重建目标之间的冲突。研究者通过对比学习建立三元组特征，使用面向特征对齐，面向共性和簇级一致性。</p>
+<h2 id="问题"><strong>问题</strong></h2>
+<p>尽管这些基于对比学习的深度MVC方法取得了重要进展，但仍然存在一些问题需要解决：( 1 )对于直接应用对比损失，如InfoNCE，许多方法的性能会受到假阴性对的影响。最小化对比损失可能会由于假阴性对而增加共享相同聚类标签的实例的特征相异性，这与聚类目标相矛盾，并导致不利于聚类的表示学习。( 2 )一些方法对特定视图进行融合，得到包含公共信息的融合视图。然而，视图私有信息不可避免地被引入到视图特征的融合中，并转移到对比学习中，干扰了聚类的质量。</p>
+<h2 id="创新点"><strong>创新点</strong></h2>
+<p>在本文中，我们提出了一种新颖的语义引导的多视图对比聚类框架来解决上述问题。如图1所示，我们的框架由特定视角的特征融合模块和跨视角的双层对比模块组成。在特定视图特征融合模块中，自编码器用于生成特定视图特征，加权融合用于生成融合视图特征。跨视图双层对比融合模块采用两个一致性目标：语义引导的实例级对比学习和簇级对比学习。通过语义特征度量的实例对权重来减轻假阴性对的影响。此外，为了减少视图私有信息的影响，在计算实例对权重时集中了公共信息。与之前的工作相比，我们的贡献如下：</p>
+<ol>
+<li>为了减少实例级对比学习中假阴性对的影响，提出了DCMCS框架。通过使用从语义特征中获得的实例对权重来学习聚类友好特征，使对比学习的目标与聚类目标保持一致。</li>
+<li>在计算实例对权重时，融合视图的公共信息集中在DCMCS中。它缓解了视图-隐私信息在融合视图中的干扰，以达到更好的聚类结果。</li>
+<li>在实验中，我们展示了实例对权重和融合视图的公共信息如何有效地工作。在几个公共数据集上的实验结果表明，我们的框架优于最先进的方法。</li>
+</ol>
+<h2 id="方法"><strong>方法</strong></h2>
+<p>在这一部分中，我们首先解释了框架中使用的定义和要达到的目标。接下来，我们介绍了框架的体系结构。最后给出了总损耗和整个优化过程。</p>
+<p><img src="https://s2.loli.net/2024/04/29/VkDpRiA4X1tHhPB.jpg" alt="img"></p>
+<p>图1  DCMCS框架图</p>
+<p>图1中的Zv表示特定视图特征，Hv表示实例级特征，Cv表示语义特征，重建目标Lcon在Zv上单独进行。在语义引导的对比学习( SGCL )和簇级对比学习( CLCL )模块中，分别在实例级特征和簇级特征上进行了两次对比损失(即Li和Lc )。此外，RC表示由语义特征生成的权重矩阵，以建立Li中负对之间的关系。</p>
+<h3 id="符号定义"><strong>符号定义</strong></h3>
+<p>给定一个具有V个视图和N个样本的多视图数据集χ = {X^v^∈R~N × D^v^~ }^V^v=1，Xv = [ x1v , x2v , … , xNv]表示第v个视图的实例。Dv表示第v个视图的特征维度。考虑到数据集中有K个簇，最终根据N个样本的相似度将其划分为K个簇。</p>
+<h3 id="特定视图特征融合"><strong>特定视图特征融合</strong></h3>
+<p>特定视角特征融合模块使用若干个特定视角自编码器(如图1所示)来提取每个视角的特征。特别地，我们指定了第v个视图的编码器fvθv和解码器gvηv，其中θv和ηv分别是编码器和解码器的参数。编码器fvθv将原始特征投影到特定视图的特征空间</p>
+<p><img src="https://s2.loli.net/2024/04/29/u13UZbTi9ApDEjr.jpg" alt="img"></p>
+<p>其中Zv = [ z1v , z2v , … , zNv]， DCMCS使用解码器gvηv重构zvi，以学习足够的判别信息，避免模型崩溃。</p>
+<p><img src="https://s2.loli.net/2024/04/29/pbxYBwakueRlN1Z.jpg" alt="img"></p>
+<p>所有视图的重建损失定义为:</p>
+<p><img src="https://s2.loli.net/2024/04/29/pGjh4b7Wg2eKuBo.jpg" alt="img"></p>
+<p>加权融合是一种简单有效的方法，通过利用多视图数据的一致性和互补性，获得更具判别性的融合视图特征。考虑到不同视图的重要性，我们使用自适应加权对视图进行融合，得到融合视图特征定义为：</p>
+<p><img src="https://s2.loli.net/2024/04/29/QkSuXHBMKdxYzCy.jpg" alt="img"></p>
+<p>式中：wv为第v个视图的权重，∑Vv=1 wv=1。权重通过损失函数优化得到，反映了不同视图的重要性。</p>
+<h3 id="簇类级对比学习"><strong>簇类级对比学习</strong></h3>
+<p>对比学习由于直接增加了语义相关实例之间的特征相似度，在去除无关信息的同时有效地捕获了高层语义。我们应用簇级对比学习来提高跨多个视图的簇一致性。采用带参数WC的两层线性MLP将视角特征和融合视角特征映射到K维空间。K为聚类数。附加一个Softmax层，得到每个视图的语义特征Cv和融合视图的语义特征C(^),语义特征描述为实例属于每个聚类的概率。实例的聚类标签对应概率最大的聚类。簇级特征Cvj表示为每个实例在第v个视图中属于簇j的概率。</p>
+<p>由于与单个样本对应的多个视图中的实例共享语义信息，因此不同视图中实例的聚类分配概率应该是相似的，并且来自同一簇的簇级特征应该是相似的。簇级对比学习增加了不同簇对应的簇对之间的距离，同时减少了相同簇对应的簇对之间的距离。对于每个融合视图簇级特征c(^) j，{ c(^) j，cvj }为正对，其余簇对为负对。</p>
+<p>余弦相似度用于量化两个簇之间的相似性，具体解释如下：</p>
+<p><img src="https://s2.loli.net/2024/04/29/AyJzspXTOS84V7j.jpg" alt="img"></p>
+<p>式中：&lt;·，·&gt;为点积算子。簇级别的对比损失定义为：</p>
+<p><img src="https://s2.loli.net/2024/04/29/xLt4rcjIlu7AH8w.jpg" alt="img"></p>
+<p>其中τ表示温度系数，H ( C )表示聚类结果的熵。熵的存在避免了陷入平凡解。</p>
+<h3 id="语义引导的实例级对比学习"><strong>语义引导的实例级对比学习</strong></h3>
+<p>正负对构造的质量是决定对比MVC方法性能的重要因素。MVC中一种流行的对比损失函数是InfoNCE</p>
+<p><img src="https://s2.loli.net/2024/04/29/F1WTjQmwqvnJaer.jpg" alt="img"></p>
+<p>InfoNCE将与单个样本对应的不同视图中的实例视为正例对，直接将其他所有非正例实例视为负例对。这容易带来假负对问题，共享相同聚类标签的实例被构造为负对，从而导致聚类不友好的表示学习。为了解决这个问题，我们提出了一种基于实例对权重的语义引导的实例级对比方法。在计算实例对权重时，我们关注的是融合视图的公共信息，而不是仅仅关注具体视图中的信息。考虑了融合视图语义特征和特定视图语义特征中的一致性和互补性。它可以产生更精确的权重，并减少视图私有信息在融合视图中的影响。它产生了优越的聚类结果。</p>
+<p><strong>实例对权重</strong> 由于同一簇中的实例具有相同的语义信息，因此可以利用实例的语义特征来建立实例关系。采用Transformer的注意力机制来评估实例之间的关系，我们首先将所有特定视图的语义特征Cv与融合视图的语义特征C(^) 进行拼接，得到C。</p>
+<p>其中m=(V+1)×K。通过在注意力机制的输入中包含C(^)，我们可以从融合视图中提取更重要的信息，并减少视图-隐私信息的影响。C通过WQ1、WQ2和WO映射到不同的特征空间。</p>
+<p><img src="https://s2.loli.net/2024/04/29/1vJbFK7XYrCnM5e.jpg" alt="img"></p>
+<p>其中Q1∈Rn×M，Q2∈Rn×M，Qo∈Rn×M。我们使用矩阵W = { WQ1，WQ2，WO }作为参数。权重矩阵RC定义为：</p>
+<p><img src="https://s2.loli.net/2024/04/29/ceNkKXDMCbjhHlT.jpg" alt="img"></p>
+<p>权重矩阵RC可以表示实例之间的关系，权重越高，表示实例对的语义特征越相似，属于同一簇的可能性越高。对于负实例对(i ,j)，实例对的权重定义为：1-RCij。</p>
+<p><strong>语义指导下的实例级对比学习</strong> DCMCS应用实例级对比学习来学习跨多个视图的实例一致性。使用单层MLP，获取特定视图的实例级特征Hv和融合视图的实例级特征H(^)。我们将特征MLP的参数记为WH。融合视图和特定视图中属于单个样本的实例被视为正例对，而所有其他非正例实例被视为负例对，融合视图作为锚点。通过实例对权重来减弱对比学习中假阴性对的影响。再次，利用余弦相似度来度量特定视图实例级特征和融合视图实例级特征之间的相似性，语义引导的实例级对比损失函数定义为：</p>
+<p><img src="https://s2.loli.net/2024/04/29/pZKEVIgj4rMG2FX.jpg" alt="img"></p>
+<p>其中τ2表示温度系数，1 - RCij表示实例对权重。RCij由式( 10 )得到。较大的权重RCij表示实例对属于同一簇的可能性较大，实例对权重1 - RCij较小。实例对权重可以减少假阴性对的影响，并产生更好的聚类友好特征。</p>
+<h3 id="优化"><strong>优化</strong></h3>
+<p>最终的整体损失函数定义如下：</p>
+<p><img src="https://s2.loli.net/2024/04/29/BrLMCDhZFUTqm5Y.jpg" alt="img"></p>
+<p>其中λ1和λ2为平衡参数。我们将λ1和λ2设定为1。DCMCS通过融合视图的语义特征获得聚类标签yi：<img src="https://s2.loli.net/2024/04/29/LFNA78gphYQ61Kj.jpg" alt="img"></p>
+<p>得到每个样本的最终聚类结果Y = [ y1 , y2 , … , yN]。我们的优化过程总结如算法1所示。</p>
+<p>算法1</p>
+<p>输入：多视图数据集 Xv；聚类数K；温度参数τ1和τ2；平衡参数λ1和λ2。</p>
+<p>1：通过最小化公式3初始化{θv，ηv }Vv = 1。( 3 )；</p>
+<p>2：通过公式4计算Z(^) ；</p>
+<p>3：最小化公式13优化WH，WC，{θv，ηv }Vv = 1；</p>
+<p>4：通过公式14计算语义标签；</p>
+<p>输出：标签预测Y = [ y1 , y2 , … , yN]。</p>
+<h2 id="实验"><strong>实验</strong></h2>
+<p><strong>评价指标</strong> 聚类有效性通过三个指标进行评估：聚类精度( ACC )、归一化互信息( NMI )和纯度( PUR )。</p>
+<p>**性能分析 表1：**所有方法在四个数据集上的结果。Bold表示最好结果，下划线表示次好结果。</p>
+<p><img src="https://s2.loli.net/2024/04/29/dVNiblTtmGf9Dna.jpg" alt="img"></p>
+<p>表2：所有方法在多视图数据集上的结果。‘ - XV '表明有X个视图可用。</p>
+<p><img src="https://s2.loli.net/2024/04/29/3qNKRkxXEZDifOt.jpg" alt="img"></p>
+<p>在四个数据集上的实验结果如表所示。从中我们可以得到以下发现：( 1 )我们的DCMCS在所有指标上都取得了最好的结果。在Synthetic3d数据集上，DCMCS在NMI上的表现比最好的可比方法AECoDDC好2 %。这是因为我们采用了语义引导的实例级对比学习，削弱了假阴性对的影响。( 2 )给出了对比方法中实例级对比学习和簇级对比学习的使用情况。由于我们同时考虑了两者并引入了实例对权重，因此我们的DCMCS表现更好。DCMCS将实例级的对比学习与聚类目标相结合，通过语义特征而不是视图特定的特征来获取实例关系。</p>
+<h2 id="结论"><strong>结论</strong></h2>
+<p>在本文中，我们提出了一个语义引导的对比多视图聚类框架。加权融合是根据每个视图的重要性来融合视图的特征。为了减少假阴性对，通过注意力机制从融合视图和特定视图的语义特征中获取实例对权重。此外，我们通过专注于融合视图的公共信息来最小化视图私有信息的影响。在多个公共数据集上的实验结果表明，DCMCS优于当前最先进的方法。我们的框架的缺点是，当数据集中存在超类时，可以简单地分配错误的簇，这导致实例被分裂成几个簇。</p>
+<p><strong>参考文献:</strong></p>
+<ol>
+<li>Bauckhage, C.: K-means clustering is matrix factorization. arXiv preprint arXiv:1512.07548 (2015) 11</li>
+<li>Chen, C., Li, X., Ng, M.K., Yuan, X.: Total variation based tensor decomposition for multi-dimensional data with time dimension. Numerical Linear Algebra with Applications 22(6), 999–1019 (2015) 1</li>
+<li>Chen, J., Mao, H., Peng, D., Zhang, C., Peng, X.: Multiview clustering by consensus spectral rotation fusion. IEEE Transactions on Image Processing (2023) 1, 3</li>
+<li>Chen, J., Mao, H., Woo, W.L., Peng, X.: Deep multiview clustering by contrasting cluster assignments. arXiv preprint arXiv:2304.10769 (2023) 3, 9, 12</li>
+<li>Chen, M.S., Lin, J.Q., Li, X.L., Liu, B.Y., Wang, C.D., Huang, D., Lai, J.H.: Representation learning in multi-view clustering: A literature review. Data Science and Engineering 7(3), 225–241 (2022) 8</li>
+<li>Chen, T., Kornblith, S., Norouzi, M., Hinton, G.: A simple framework for contrastive learning of visual representations. In: International conference on machine learning. pp. 1597–1607. PMLR (2020) 2, 3, 6</li>
+<li>Chen, W., Wang, H., Liang, C.: Deep multi-view contrastive learning for cancer subtype identification. Briefings in Bioinformatics 24(5), bbad282 (2023) 1</li>
+<li>Chen, Z., Li, Y., Lou, K., Zhao, L.: Incomplete multi-view clustering with complete view guidance. IEEE Signal Processing Letters (2023) 3</li>
+<li>Cui, C., Ren, Y., Pu, J., Pu, X., He, L.: Deep multi-view subspace clustering with anchor graph. arXiv preprint arXiv:2305.06939 (2023) 3</li>
+<li>Fang, U., Li, M., Li, J., Gao, L., Jia, T., Zhang, Y.: A comprehensive survey on multi-view clustering. IEEE Transactions on Knowledge and Data Engineering (2023) 1</li>
+<li>Fei-Fei, L., Fergus, R., Perona, P.: Learning generative visual models from few training examples: An incremental bayesian approach tested on 101 object categories. In: 2004 conference on computer vision and pattern recognition workshop. pp. 178–178. IEEE (2004) 9</li>
+<li>Guo, J., Ye, J.: Anchors bring ease: An embarrassingly simple approach to partial multi-view clustering. In: Proceedings of the AAAI conference on artificial intelligence. vol. 33, pp. 118–125 (2019) 1</li>
+<li>Guo, X., Gao, L., Liu, X., Yin, J.: Improved deep embedded clustering with local structure preservation. In: Ijcai. vol. 17, pp. 1753–1759 (2017) 4</li>
+<li>He, K., Fan, H., Wu, Y., Xie, S., Girshick, R.: Momentum contrast for unsupervised visual representation learning. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 9729–9738 (2020) 3</li>
+<li>Hu, S., Zou, G., Zhang, C., Lou, Z., Geng, R., Ye, Y.: Joint contrastive triplelearning for deep multi-view clustering. Information Processing &amp; Management 60(3), 103284 (2023) 2, 3</li>
+<li>Hu, W., Miyato, T., Tokui, S., Matsumoto, E., Sugiyama, M.: Learning discrete representations via information maximizing self-augmented training. In: International conference on machine learning. pp. 1558–1567. PMLR (2017) 6</li>
+<li>Jin, Y., Li, C., Li, Y., Peng, P., Giannopoulos, G.A.: Model latent views with multi-center metric learning for vehicle re-identification. IEEE Transactions on Intelligent Transportation Systems 22(3), 1919–1931 (2021) 1</li>
+<li>Kang, Z., Shi, G., Huang, S., Chen, W., Pu, X., Zhou, J.T., Xu, Z.: Multi-graph fusion for multi-view spectral clustering. Knowledge-Based Systems 189, 105102 (2020) 1</li>
+<li>Ke, G., Hong, Z., Zeng, Z., Liu, Z., Sun, Y., Xie, Y.: Conan: contrastive fusion networks for multi-view clustering. In: 2021 IEEE International Conference on Big Data (Big Data). pp. 653–660. IEEE (2021) 2, 9</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">流星の涙</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/29/%E8%AF%AD%E4%B9%89%E7%89%B9%E5%BE%81%E6%8C%87%E5%AF%BC%E4%B8%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/">http://example.com/2024/04/29/%E8%AF%AD%E4%B9%89%E7%89%B9%E5%BE%81%E6%8C%87%E5%AF%BC%E4%B8%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">哒哒哒！</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/">多视图聚类</a></div><div class="post_share"><div class="social-share" data-image="/img/wg/mx.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/04/15/%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/"><img class="next-cover" src="/img/wg/mx.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">对比学习中的损失函数</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/04/08/DCP与MFLVC的异同/" title="DCP与MFLVC的异同"><img class="cover" src="/img/wg/mx.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-08</div><div class="title">DCP与MFLVC的异同</div></div></a></div><div><a href="/2024/04/04/基于图的多视图聚类/" title="基于图的多视图聚类"><img class="cover" src="/img/wg/mx.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-04</div><div class="title">基于图的多视图聚类</div></div></a></div><div><a href="/2024/03/26/基于对比预测的缺失视图聚类方法/" title="基于对比预测的缺失视图聚类方法"><img class="cover" src="/img/wg/mx.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-26</div><div class="title">基于对比预测的缺失视图聚类方法</div></div></a></div><div><a href="/2024/04/04/多视图的对比学习编码/" title="多视图的对比学习编码"><img class="cover" src="/img/wg/mx.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-04</div><div class="title">多视图的对比学习编码</div></div></a></div><div><a href="/2024/04/04/多视图聚类的研究/" title="多视图聚类的研究"><img class="cover" src="/img/wg/mx.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-04</div><div class="title">多视图聚类的研究</div></div></a></div><div><a href="/2024/04/15/对比学习中的损失函数/" title="对比学习中的损失函数"><img class="cover" src="/img/wg/mx.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-15</div><div class="title">对比学习中的损失函数</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/tg/z.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">流星の涙</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Atonioy"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">干巴嘚</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text">动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E6%96%B0%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">创新点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">符号定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E5%AE%9A%E8%A7%86%E5%9B%BE%E7%89%B9%E5%BE%81%E8%9E%8D%E5%90%88"><span class="toc-number">4.2.</span> <span class="toc-text">特定视图特征融合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B0%87%E7%B1%BB%E7%BA%A7%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0"><span class="toc-number">4.3.</span> <span class="toc-text">簇类级对比学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E4%B9%89%E5%BC%95%E5%AF%BC%E7%9A%84%E5%AE%9E%E4%BE%8B%E7%BA%A7%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0"><span class="toc-number">4.4.</span> <span class="toc-text">语义引导的实例级对比学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96"><span class="toc-number">4.5.</span> <span class="toc-text">优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">5.</span> <span class="toc-text">实验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">6.</span> <span class="toc-text">结论</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/04/29/%E8%AF%AD%E4%B9%89%E7%89%B9%E5%BE%81%E6%8C%87%E5%AF%BC%E4%B8%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/" title="语义特征指导下的深度对比多视图聚类"><img src="/img/wg/mx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="语义特征指导下的深度对比多视图聚类"/></a><div class="content"><a class="title" href="/2024/04/29/%E8%AF%AD%E4%B9%89%E7%89%B9%E5%BE%81%E6%8C%87%E5%AF%BC%E4%B8%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB/" title="语义特征指导下的深度对比多视图聚类">语义特征指导下的深度对比多视图聚类</a><time datetime="2024-04-29T12:40:55.000Z" title="发表于 2024-04-29 20:40:55">2024-04-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/15/%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="对比学习中的损失函数"><img src="/img/wg/mx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="对比学习中的损失函数"/></a><div class="content"><a class="title" href="/2024/04/15/%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="对比学习中的损失函数">对比学习中的损失函数</a><time datetime="2024-04-15T07:20:13.000Z" title="发表于 2024-04-15 15:20:13">2024-04-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/08/DCP%E4%B8%8EMFLVC%E7%9A%84%E5%BC%82%E5%90%8C/" title="DCP与MFLVC的异同"><img src="/img/wg/mx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DCP与MFLVC的异同"/></a><div class="content"><a class="title" href="/2024/04/08/DCP%E4%B8%8EMFLVC%E7%9A%84%E5%BC%82%E5%90%8C/" title="DCP与MFLVC的异同">DCP与MFLVC的异同</a><time datetime="2024-04-08T06:13:20.000Z" title="发表于 2024-04-08 14:13:20">2024-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/05/%E9%9D%A2%E5%90%91%E5%AF%B9%E6%AF%94%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E5%A4%9A%E5%B1%82%E6%AC%A1%E7%89%B9%E5%BE%81%E5%AD%A6%E4%B9%A0/" title="面向对比多视图聚类的多层次特征学习"><img src="/img/wg/mx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面向对比多视图聚类的多层次特征学习"/></a><div class="content"><a class="title" href="/2024/04/05/%E9%9D%A2%E5%90%91%E5%AF%B9%E6%AF%94%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E5%A4%9A%E5%B1%82%E6%AC%A1%E7%89%B9%E5%BE%81%E5%AD%A6%E4%B9%A0/" title="面向对比多视图聚类的多层次特征学习">面向对比多视图聚类的多层次特征学习</a><time datetime="2024-04-05T06:32:35.000Z" title="发表于 2024-04-05 14:32:35">2024-04-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E7%A0%94%E7%A9%B6/" title="多视图聚类的研究"><img src="/img/wg/mx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="多视图聚类的研究"/></a><div class="content"><a class="title" href="/2024/04/04/%E5%A4%9A%E8%A7%86%E5%9B%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E7%A0%94%E7%A9%B6/" title="多视图聚类的研究">多视图聚类的研究</a><time datetime="2024-04-04T13:15:39.591Z" title="发表于 2024-04-04 21:15:39">2024-04-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 流星の涙</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = new Waline(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comments-rouge.vercel.app',
+      avatar: 'monsterid',
+      avatarCDN: 'https://sdn.geekzu.org/avatar/',
+      path: location.pathname,
+      visitor: true,
+      dark: 'html[data-theme="dark"]'
+    }, null))
+  }
+
+  if (typeof Waline === 'function') initWaline() 
+  else getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js').then(initWaline)
+}
+
+if ('Waline' === 'Waline' || !false) {
+  if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><div class="aplayer no-destroy" data-id="8044943229" data-server="tencent" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
